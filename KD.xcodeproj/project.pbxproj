@@ -7,23 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3098B1B2A8EC005009C27CB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3098B1A2A8EC005009C27CB /* AppSettings.swift */; };
+		EC02DCE82A9380F800E47678 /* SingleProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02DCE72A9380F800E47678 /* SingleProductView.swift */; };
+		EC09311D2A8E958F0011453C /* BasketItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC09311C2A8E958F0011453C /* BasketItemType.swift */; };
+		EC331EE62A854E3C00EA73E2 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC331EE52A854E3C00EA73E2 /* FavoriteViewController.swift */; };
+		EC75AA482A7D20EC00B8641D /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC75AA472A7D20EC00B8641D /* LogoView.swift */; };
+		EC75AA4A2A7D276100B8641D /* MenuItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC75AA492A7D276100B8641D /* MenuItemType.swift */; };
 		EC91E6412A7C316C004231CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6402A7C316C004231CC /* AppDelegate.swift */; };
 		EC91E6432A7C316C004231CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6422A7C316C004231CC /* SceneDelegate.swift */; };
-		EC91E6452A7C316C004231CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6442A7C316C004231CC /* ViewController.swift */; };
-		EC91E6482A7C316C004231CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC91E6462A7C316C004231CC /* Main.storyboard */; };
+		EC91E6452A7C316C004231CC /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6442A7C316C004231CC /* MainTabBarController.swift */; };
 		EC91E64A2A7C316E004231CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC91E6492A7C316E004231CC /* Assets.xcassets */; };
 		EC91E64D2A7C316E004231CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC91E64B2A7C316E004231CC /* LaunchScreen.storyboard */; };
+		EC91E6562A7C3187004231CC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC91E6552A7C3187004231CC /* SnapKit */; };
+		EC91E6582A7C320D004231CC /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6572A7C320D004231CC /* ProductModel.swift */; };
+		EC91E65A2A7C3245004231CC /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6592A7C3245004231CC /* BasketViewController.swift */; };
+		EC91E65C2A7C3251004231CC /* BasketViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65B2A7C3251004231CC /* BasketViewCell.swift */; };
+		EC91E65E2A7C325D004231CC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65D2A7C325C004231CC /* MenuViewController.swift */; };
+		EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E3098B1A2A8EC005009C27CB /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		EC02DCE72A9380F800E47678 /* SingleProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProductView.swift; sourceTree = "<group>"; };
+		EC09311C2A8E958F0011453C /* BasketItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemType.swift; sourceTree = "<group>"; };
+		EC331EE52A854E3C00EA73E2 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		EC75AA472A7D20EC00B8641D /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
+		EC75AA492A7D276100B8641D /* MenuItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemType.swift; sourceTree = "<group>"; };
 		EC91E63D2A7C316C004231CC /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC91E6402A7C316C004231CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC91E6422A7C316C004231CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EC91E6442A7C316C004231CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EC91E6472A7C316C004231CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC91E6442A7C316C004231CC /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		EC91E6492A7C316E004231CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC91E64C2A7C316E004231CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC91E64E2A7C316E004231CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC91E6572A7C320D004231CC /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		EC91E6592A7C3245004231CC /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
+		EC91E65B2A7C3251004231CC /* BasketViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewCell.swift; sourceTree = "<group>"; };
+		EC91E65D2A7C325C004231CC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +52,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC91E6562A7C3187004231CC /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC02DCE92A93BD7A00E47678 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC91E6592A7C3245004231CC /* BasketViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EC02DCEA2A93BD9600E47678 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC02DCEB2A93BDB800E47678 /* Cells */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EC02DCEB2A93BDB800E47678 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		EC75AA462A7D20CC00B8641D /* LogoCell */ = {
+			isa = PBXGroup;
+			children = (
+				EC75AA472A7D20EC00B8641D /* LogoView.swift */,
+			);
+			name = LogoCell;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		EC91E6342A7C316C004231CC = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +110,74 @@
 		EC91E63F2A7C316C004231CC /* KD */ = {
 			isa = PBXGroup;
 			children = (
+				EC331EE52A854E3C00EA73E2 /* FavoriteViewController.swift */,
+				EC02DCEA2A93BD9600E47678 /* Classes */,
+				EC02DCE92A93BD7A00E47678 /* ViewControllers */,
+				EC91E6672A7C3821004231CC /* Application */,
+				EC91E6652A7C32E5004231CC /* Model */,
+				EC91E6642A7C32DB004231CC /* Basket */,
+				EC91E6632A7C32CF004231CC /* Menu */,
+				EC91E6662A7C34A7004231CC /* TabBar */,
+				EC91E6682A7C3849004231CC /* Resourses */,
+			);
+			path = KD;
+			sourceTree = "<group>";
+		};
+		EC91E6632A7C32CF004231CC /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				EC75AA462A7D20CC00B8641D /* LogoCell */,
+				EC91E65D2A7C325C004231CC /* MenuViewController.swift */,
+				EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */,
+				EC75AA492A7D276100B8641D /* MenuItemType.swift */,
+				EC02DCE72A9380F800E47678 /* SingleProductView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		EC91E6642A7C32DB004231CC /* Basket */ = {
+			isa = PBXGroup;
+			children = (
+				EC91E65B2A7C3251004231CC /* BasketViewCell.swift */,
+				EC09311C2A8E958F0011453C /* BasketItemType.swift */,
+			);
+			path = Basket;
+			sourceTree = "<group>";
+		};
+		EC91E6652A7C32E5004231CC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC91E6572A7C320D004231CC /* ProductModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC91E6662A7C34A7004231CC /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				EC91E6442A7C316C004231CC /* MainTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		EC91E6672A7C3821004231CC /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				EC91E6402A7C316C004231CC /* AppDelegate.swift */,
 				EC91E6422A7C316C004231CC /* SceneDelegate.swift */,
-				EC91E6442A7C316C004231CC /* ViewController.swift */,
-				EC91E6462A7C316C004231CC /* Main.storyboard */,
+				E3098B1A2A8EC005009C27CB /* AppSettings.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EC91E6682A7C3849004231CC /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
 				EC91E6492A7C316E004231CC /* Assets.xcassets */,
 				EC91E64B2A7C316E004231CC /* LaunchScreen.storyboard */,
 				EC91E64E2A7C316E004231CC /* Info.plist */,
 			);
-			path = KD;
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +196,9 @@
 			dependencies = (
 			);
 			name = KD;
+			packageProductDependencies = (
+				EC91E6552A7C3187004231CC /* SnapKit */,
+			);
 			productName = KD;
 			productReference = EC91E63D2A7C316C004231CC /* KD.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +227,9 @@
 				Base,
 			);
 			mainGroup = EC91E6342A7C316C004231CC;
+			packageReferences = (
+				EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = EC91E63E2A7C316C004231CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +246,6 @@
 			files = (
 				EC91E64D2A7C316E004231CC /* LaunchScreen.storyboard in Resources */,
 				EC91E64A2A7C316E004231CC /* Assets.xcassets in Resources */,
-				EC91E6482A7C316C004231CC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +256,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC91E6452A7C316C004231CC /* ViewController.swift in Sources */,
+				E3098B1B2A8EC005009C27CB /* AppSettings.swift in Sources */,
+				EC91E65C2A7C3251004231CC /* BasketViewCell.swift in Sources */,
+				EC91E6452A7C316C004231CC /* MainTabBarController.swift in Sources */,
 				EC91E6412A7C316C004231CC /* AppDelegate.swift in Sources */,
 				EC91E6432A7C316C004231CC /* SceneDelegate.swift in Sources */,
+				EC75AA482A7D20EC00B8641D /* LogoView.swift in Sources */,
+				EC91E65A2A7C3245004231CC /* BasketViewController.swift in Sources */,
+				EC09311D2A8E958F0011453C /* BasketItemType.swift in Sources */,
+				EC02DCE82A9380F800E47678 /* SingleProductView.swift in Sources */,
+				EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */,
+				EC331EE62A854E3C00EA73E2 /* FavoriteViewController.swift in Sources */,
+				EC91E65E2A7C325D004231CC /* MenuViewController.swift in Sources */,
+				EC91E6582A7C320D004231CC /* ProductModel.swift in Sources */,
+				EC75AA4A2A7D276100B8641D /* MenuItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EC91E6462A7C316C004231CC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC91E6472A7C316C004231CC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EC91E64B2A7C316E004231CC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,10 +410,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W5S29493U2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KD/Info.plist;
+				INFOPLIST_FILE = KD/Resourses/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -317,10 +438,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W5S29493U2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KD/Info.plist;
+				INFOPLIST_FILE = KD/Resourses/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +479,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC91E6552A7C3187004231CC /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EC91E6352A7C316C004231CC /* Project object */;
 }
