@@ -10,6 +10,8 @@ import SnapKit
 
 class BasketViewCell: UITableViewCell {
     
+    private let cellID = "cellBasket"
+    
     func configure(with info: ProductModel) {
         imageProductView.image = info.imageProduct
         labelNameProduct.text = info.nameProduct
