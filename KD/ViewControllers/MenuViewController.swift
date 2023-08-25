@@ -44,7 +44,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = Menu.menu[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as! MenuViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as? MenuViewCell else {return UITableViewCell()}
         cell.configure(with: item)
         cell.addProductClosure = {
             AppSettings.settings.basket.append(item)

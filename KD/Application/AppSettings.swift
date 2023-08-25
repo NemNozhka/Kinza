@@ -12,26 +12,23 @@ import UIKit
 class AppSettings {
     static let settings = AppSettings()
     
+    private let basketDataUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("basket.data")
     var basket: [ProductModel] = [] {
         didSet {
             print(basket.count)
-            saveBasketToUserDefaults()
+            do {
+                let data = try JSONEncoder().encode(basket)
+                try data.write(to: basketDataUrl, options: .atomic)
+            } catch {
+                print("Error while write saved objects: ", error)
+            }
         }
     }
     
     static let basketKey = "BasketKey"
     
-    private init() {
+    init() {
         loadBasketFromUserDefaults()
-    }
-    
-    private func saveBasketToUserDefaults() {
-        do {
-            let encodedData = try NSKeyedArchiver.archivedData(withRootObject: basket, requiringSecureCoding: false)
-            UserDefaults.standard.set(encodedData, forKey: AppSettings.basketKey)
-        } catch {
-            print("Ошибка при кодировании basket: \(error.localizedDescription)")
-        }
     }
     
     private func loadBasketFromUserDefaults() {
