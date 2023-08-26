@@ -13,7 +13,7 @@ class MenuViewCell: UITableViewCell {
     private let cellID = "cellMenu"
     
     func configure(with info: ProductModel) {
-        imageProductView.image = info.imageProduct
+        imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         labelDiscriptionProduct.text = info.discriptionProduct
         buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)

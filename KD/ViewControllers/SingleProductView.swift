@@ -13,7 +13,7 @@ import SnapKit
 class SingleProductView: UIViewController {
     
     func configure(with info: ProductModel) {
-        imageProduct.image = info.imageProduct
+        imageProduct.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         //        labelDiscriptionProduct.text = info.discriptionProduct
         //        buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
