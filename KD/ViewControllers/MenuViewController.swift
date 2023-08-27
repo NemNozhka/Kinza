@@ -15,8 +15,8 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         initialize()
         title = "Меню"
-        
     }
+    
     private let tableView = UITableView()
 }
 
@@ -52,23 +52,15 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectCell = tableView.cellForRow(at: indexPath)
-//
-//        let singleProductView = SingleProductView()
-//
-//        self.present(singleProductView, animated: true, completion: nil)
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            guard let indexPath = tableView.indexPathForSelectedRow  else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow  else { return }
         let item = Menu.menu[indexPath.row]
-
+        
         let singleProductView = SingleProductView()
         singleProductView.configure(with: item)
-            DispatchQueue.main.async {
-                self.navigationController?.present(singleProductView, animated: true)
-            }
+        DispatchQueue.main.async {
+            self.navigationController?.present(singleProductView, animated: true)
         }
+    }
 }
 

@@ -29,12 +29,10 @@ class MenuViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
     
     //MARK: - изображение продукта
     private let imageProductView: UIImageView = {
-       let imageProductView = UIImageView()
+        let imageProductView = UIImageView()
         imageProductView.layer.cornerRadius = UIConstants.ConstantsForMenuViewCell.imageProductSize * 0.15
         imageProductView.clipsToBounds = true
         return imageProductView
@@ -79,7 +77,7 @@ class MenuViewCell: UITableViewCell {
     
     //MARK: - title дети обожают
     private let likeChildrenLabel: UILabel = {
-       let likeLabel = UILabel()
+        let likeLabel = UILabel()
         likeLabel.text = "Дети обожают"
         likeLabel.backgroundColor = UIConstants.Colors.colorLabelLikeChildren
         likeLabel.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.likeChildrenLabelFontSize, weight: .medium)
@@ -92,7 +90,7 @@ class MenuViewCell: UITableViewCell {
     
     //MARK: - title острая
     private let spicyLabel: UILabel = {
-       let spicyLabel = UILabel()
+        let spicyLabel = UILabel()
         spicyLabel.text = "Острая"
         spicyLabel.backgroundColor = UIConstants.Colors.colorSpicyLabel
         spicyLabel.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.spicyLabelLabelFontSize, weight: .medium)
@@ -126,7 +124,7 @@ private extension MenuViewCell {
         nameProductAndPriceProductStackView.spacing = UIConstants.ConstantsForMenuViewCell.spacingBetweenNameAndDiscription
         contentView.addSubview(nameProductAndPriceProductStackView)
         nameProductAndPriceProductStackView.snp.makeConstraints { make in
-           make.centerY.equalTo(imageProductView)
+            make.centerY.equalTo(imageProductView)
             make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
             make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
         }
@@ -147,7 +145,6 @@ private extension MenuViewCell {
             make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtSpicyLabel)
         }
         
-        
         contentView.addSubview(buttonAddBasketProduct)
         buttonAddBasketProduct.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromBottom)
@@ -156,14 +153,5 @@ private extension MenuViewCell {
             make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidthtButton)
         }
         
-        
     }
-    
-//    func configureLabelDiscriptionProduct(with label: ProductModel) {
-//        let string = label.nameProduct
-//        let attributeString = NSMutableAttributedString(string: string)
-//        let range = NSRange(location: .zero, length: label.nameProduct.count)
-//        attributeString.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: UIConstants.Constants.labelNameProductFontSize), range: range)
-//        labelNameProduct.attributedText = attributeString
-//    }
 }

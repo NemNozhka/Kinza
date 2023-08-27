@@ -41,40 +41,10 @@ class Menu {
         ProductModel(imageProduct: "СырБрынза", priceProduct: 660, nameProduct: "Сыр брынза", discriptionProduct: "100 гр.", itLikeChildren: false, isSpicy: false),
         ProductModel(imageProduct: "Хлеб", priceProduct: 80, nameProduct: "Хлеб", discriptionProduct: "400 гр.", itLikeChildren: false, isSpicy: false)
     ]
-    
 }
 
-
-
-//struct ProductModel {
-//
-//    let imageProduct: UIImage
-//    let priceProduct: Int
-//    let nameProduct: String
-//    let discriptionProduct: String?
-//    let itLikeChildren: Bool
-//    let isSpicy: Bool
-//
-//
-//}
-
-
-//    let type: CategoryProduct
-
-//let favoriteProduct: Bool // избранное
-//let measurementProduct: String? // единица измерение продукта
-//let quantityProduct: String? //кол-во
-//    let type: CategoryProduct //категория
-
-//enum CategoryProduct {
-//    case khachapuri // хачапури
-//    case pizza  // пицца
-//    case brazier // мангал
-//    case additionally //дополнительно, к блюду
-//}
-
-
 struct ProductModel: Codable {
+    
     let imageProduct: String
     let priceProduct: Int
     let nameProduct: String
@@ -83,42 +53,3 @@ struct ProductModel: Codable {
     let isSpicy: Bool
 }
 
-//class ProductModel2: NSObject, NSCoding {
-//    let imageProduct: UIImage
-//    let priceProduct: Int
-//    let nameProduct: String
-//    let discriptionProduct: String?
-//    let itLikeChildren: Bool
-//    let isSpicy: Bool
-//
-////    init(imageProduct: UIImage, priceProduct: Int, nameProduct: String, discriptionProduct: String?, itLikeChildren: Bool, isSpicy: Bool) {
-////        self.imageProduct = imageProduct
-////        self.priceProduct = priceProduct
-////        self.nameProduct = nameProduct
-////        self.discriptionProduct = discriptionProduct
-////        self.itLikeChildren = itLikeChildren
-////        self.isSpicy = isSpicy
-////    }
-//
-//    func encode(with coder: NSCoder) {
-//        coder.encode(imageProduct, forKey: "imageProduct")
-//        coder.encode(priceProduct, forKey: "priceProduct")
-//        coder.encode(nameProduct, forKey: "nameProduct")
-//        coder.encode(discriptionProduct, forKey: "discriptionProduct")
-//        coder.encode(itLikeChildren, forKey: "itLikeChildren")
-//        coder.encode(isSpicy, forKey: "isSpicy")
-//    }
-//
-//    required convenience init?(coder: NSCoder) {
-//        guard let imageProduct = coder.decodeObject(forKey: "imageProduct") as? UIImage,
-//              let nameProduct = coder.decodeObject(forKey: "nameProduct") as? String,
-//              let discriptionProduct = coder.decodeObject(forKey: "discriptionProduct") as? String?,
-//              let itLikeChildren = coder.decodeBool(forKey: "itLikeChildren") as? Bool,
-//              let isSpicy = coder.decodeBool(forKey: "isSpicy") as? Bool
-//        else {
-//            return nil
-//        }
-//
-//        self.init(imageProduct: imageProduct, priceProduct: coder.decodeInteger(forKey: "priceProduct"), nameProduct: nameProduct, discriptionProduct: discriptionProduct, itLikeChildren: itLikeChildren, isSpicy: isSpicy)
-//    }
-//}
