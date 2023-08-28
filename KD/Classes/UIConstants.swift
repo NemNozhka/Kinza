@@ -58,5 +58,17 @@ class UIConstants {
         static let imageProductSize: CGFloat = 300
         static let insetImageProductFromTop: CGFloat = 30
         static let insetImageProductFromLeading: CGFloat = 30
+        
+        static let insetLabelFromImage: CGFloat = 40
+        
+        static let insetButtonFromLabel: CGFloat = 40
+        
+        static let insetBackButtonFromTop: CGFloat = 20
+        static let insetBackButtonFromLeading: CGFloat = 20
+        static let sizeBackButton: CGFloat = 40
+        
+        static let insetLabelDescriptionFromButton: CGFloat = 20
+        
+        static let insetLabelWeightFromLabelDescription: CGFloat = 20
     }
 }

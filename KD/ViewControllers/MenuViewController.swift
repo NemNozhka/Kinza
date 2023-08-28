@@ -13,16 +13,12 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        setTableView()
         title = "Меню"
     }
     
     private let tableView = UITableView()
-}
-
-
-extension MenuViewController {
-    func initialize() {
+    func setTableView() {
         tableView.bounces = false
         tableView.backgroundColor = .systemGray6
         tableView.dataSource = self
@@ -36,6 +32,9 @@ extension MenuViewController {
         }
     }
 }
+
+
+
 
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,9 +57,10 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         let singleProductView = SingleProductView()
         singleProductView.configure(with: item)
-        DispatchQueue.main.async {
-            self.navigationController?.present(singleProductView, animated: true)
+        singleProductView.addProductClosure = {
+            AppSettings.settings.basket.append(item)
         }
+        present(singleProductView, animated: true)
     }
 }
 

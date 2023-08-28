@@ -21,6 +21,55 @@ class MenuViewCell: UITableViewCell {
         spicyLabel.isHidden = !info.isSpicy
     }
     
+    func initialize() {
+        contentView.backgroundColor = .systemGray6
+        selectionStyle = .none //убрали выделение ячейки
+        contentView.addSubview(imageProductView)
+        imageProductView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetImageProductFromLeading)
+            //make.height.equalTo(contentView.snp.width) //высота равна ширине
+            make.size.equalTo(UIConstants.ConstantsForMenuViewCell.imageProductSize)
+        }
+        
+        let nameProductAndPriceProductStackView = UIStackView()
+        nameProductAndPriceProductStackView.axis = .vertical
+        nameProductAndPriceProductStackView.addArrangedSubview(labelNameProduct)
+        nameProductAndPriceProductStackView.addArrangedSubview(labelDiscriptionProduct)
+        nameProductAndPriceProductStackView.layer.cornerRadius = 4
+        nameProductAndPriceProductStackView.spacing = UIConstants.ConstantsForMenuViewCell.spacingBetweenNameAndDiscription
+        contentView.addSubview(nameProductAndPriceProductStackView)
+        nameProductAndPriceProductStackView.snp.makeConstraints { make in
+            make.centerY.equalTo(imageProductView)
+            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
+        }
+        
+        contentView.addSubview(likeChildrenLabel)
+        likeChildrenLabel.snp.makeConstraints { make in
+            make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProduct)
+            make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProductTop)
+            make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightLikeChildren)
+            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtLikeChildren)
+        }
+        
+        contentView.addSubview(spicyLabel)
+        spicyLabel.snp.makeConstraints { make in
+            make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProduct)
+            make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProductTop)
+            make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightSpicyLabel)
+            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtSpicyLabel)
+        }
+        
+        contentView.addSubview(buttonAddBasketProduct)
+        buttonAddBasketProduct.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromBottom)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromTrailing)
+            make.top.equalTo(nameProductAndPriceProductStackView.snp.bottom).offset(UIConstants.ConstantsForMenuViewCell.insetButtonFromStackView)
+            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidthtButton)
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initialize()
@@ -71,8 +120,6 @@ class MenuViewCell: UITableViewCell {
     @objc func didTapAddBasketProduct() {
         print("Tap AddBasketProduct")
         addProductClosure?()
-        
-        
     }
     
     //MARK: - title дети обожают
@@ -100,58 +147,7 @@ class MenuViewCell: UITableViewCell {
         spicyLabel.textAlignment = .center
         return spicyLabel
     }()
-    
 }
 
-//MARK: - Private methods
-private extension MenuViewCell {
-    func initialize() {
-        contentView.backgroundColor = .systemGray6
-        selectionStyle = .none //убрали выделение ячейки
-        contentView.addSubview(imageProductView)
-        imageProductView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetImageProductFromLeading)
-            //make.height.equalTo(contentView.snp.width) //высота равна ширине
-            make.size.equalTo(UIConstants.ConstantsForMenuViewCell.imageProductSize)
-        }
-        
-        let nameProductAndPriceProductStackView = UIStackView()
-        nameProductAndPriceProductStackView.axis = .vertical
-        nameProductAndPriceProductStackView.addArrangedSubview(labelNameProduct)
-        nameProductAndPriceProductStackView.addArrangedSubview(labelDiscriptionProduct)
-        nameProductAndPriceProductStackView.layer.cornerRadius = 4
-        nameProductAndPriceProductStackView.spacing = UIConstants.ConstantsForMenuViewCell.spacingBetweenNameAndDiscription
-        contentView.addSubview(nameProductAndPriceProductStackView)
-        nameProductAndPriceProductStackView.snp.makeConstraints { make in
-            make.centerY.equalTo(imageProductView)
-            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
-            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
-        }
-        
-        contentView.addSubview(likeChildrenLabel)
-        likeChildrenLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProduct)
-            make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProductTop)
-            make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightLikeChildren)
-            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtLikeChildren)
-        }
-        
-        contentView.addSubview(spicyLabel)
-        spicyLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProduct)
-            make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProductTop)
-            make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightSpicyLabel)
-            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtSpicyLabel)
-        }
-        
-        contentView.addSubview(buttonAddBasketProduct)
-        buttonAddBasketProduct.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromBottom)
-            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromTrailing)
-            make.top.equalTo(nameProductAndPriceProductStackView.snp.bottom).offset(UIConstants.ConstantsForMenuViewCell.insetButtonFromStackView)
-            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidthtButton)
-        }
-        
-    }
-}
+
+

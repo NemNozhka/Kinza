@@ -15,40 +15,10 @@ class BasketViewCell: UITableViewCell {
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
+        labelPrice.text = "\(String(info.priceProduct)) Руб."
         
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initialize()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-}
-
-//MARK: - изображение продукта
-private let imageProductView: UIImageView = {
-    let imageProductView = UIImageView()
-    imageProductView.layer.cornerRadius = UIConstants.ConstantsForMenuViewCell.imageProductSize * 0.15
-    imageProductView.clipsToBounds = true
-    return imageProductView
-}()
-
-//MARK: - Надпись названия продукта
-private let labelNameProduct: UILabel = {
-    let labelNameProduct = UILabel()
-    labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductSize, weight: .bold)
-    labelNameProduct.numberOfLines = 0
-    return labelNameProduct
-}()
-
-
-//MARK: - Private methods
-private extension BasketViewCell {
     func initialize() {
         contentView.backgroundColor = .systemGray6
         selectionStyle = .none //убрали выделение ячейки
@@ -67,13 +37,43 @@ private extension BasketViewCell {
             make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
             make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
         }
+        contentView.addSubview(labelPrice)
+        labelPrice.snp.makeConstraints { make in
+            make.top.equalTo(labelNameProduct.snp.bottom).offset(UIConstants.ConstantsForMenuViewCell.insetButtonFromStackView)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromTrailing)
+        }
     }
     
-    func configureLabelDiscriptionProduct(with label: ProductModel) {
-        let string = label.nameProduct
-        let attributeString = NSMutableAttributedString(string: string)
-        let range = NSRange(location: .zero, length: label.nameProduct.count)
-        attributeString.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductFontSize), range: range)
-        labelNameProduct.attributedText = attributeString
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        initialize()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    //MARK: - изображение продукта
+    private let imageProductView: UIImageView = {
+        let imageProductView = UIImageView()
+        imageProductView.layer.cornerRadius = UIConstants.ConstantsForMenuViewCell.imageProductSize * 0.15
+        imageProductView.clipsToBounds = true
+        return imageProductView
+    }()
+    
+    //MARK: - Надпись названия продукта
+    private let labelNameProduct: UILabel = {
+        let labelNameProduct = UILabel()
+        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductSize, weight: .bold)
+        labelNameProduct.numberOfLines = 0
+        return labelNameProduct
+    }()
+    
+    private let labelPrice: UILabel = {
+        let label = UILabel()
+        
+        
+        return label
+    }()
 }
