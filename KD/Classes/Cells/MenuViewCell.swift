@@ -50,7 +50,7 @@ class MenuViewCell: UITableViewCell {
             make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProduct)
             make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProductTop)
             make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightLikeChildren)
-            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtLikeChildren)
+            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.widthLikeChildren)
         }
         
         contentView.addSubview(spicyLabel)
@@ -58,7 +58,7 @@ class MenuViewCell: UITableViewCell {
             make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProduct)
             make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProductTop)
             make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightSpicyLabel)
-            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidtSpicyLabel)
+            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.widthSpicyLabel)
         }
         
         contentView.addSubview(buttonAddBasketProduct)
@@ -66,7 +66,7 @@ class MenuViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromBottom)
             make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromTrailing)
             make.top.equalTo(nameProductAndPriceProductStackView.snp.bottom).offset(UIConstants.ConstantsForMenuViewCell.insetButtonFromStackView)
-            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.weidthtButton)
+            make.width.equalTo(UIConstants.ConstantsForMenuViewCell.widthButton)
         }
     }
     
@@ -90,7 +90,7 @@ class MenuViewCell: UITableViewCell {
     //MARK: - Надпись названия продукта
     private let labelNameProduct: UILabel = {
         let labelNameProduct = UILabel()
-        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductSize, weight: .bold)
+        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .bold)
         labelNameProduct.numberOfLines = 0
         return labelNameProduct
     }()
@@ -107,7 +107,7 @@ class MenuViewCell: UITableViewCell {
     //MARK: - Кнопка добавления продукта в корзину
     private let buttonAddBasketProduct: UIButton = {
         let buttonAddBasketProduct = UIButton(type: .system)
-        buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductSize, weight: .medium)
+        buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .medium)
         buttonAddBasketProduct.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         buttonAddBasketProduct.tintColor = .black
         buttonAddBasketProduct.layer.cornerRadius = 10

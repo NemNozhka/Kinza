@@ -18,12 +18,10 @@ class SingleProductView: BackViewController {
         labelDiscription.text = info.discriptionProduct
         addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
         labelWeight.text = "Вес: \(info.weight) гр."
-        //        likeChildrenLabel.isHidden = !info.itLikeChildren
-        //        spicyLabel.isHidden = !info.isSpicy
     }
     
     func initializeUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         
         view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
@@ -38,35 +36,38 @@ class SingleProductView: BackViewController {
             }
         }
         
+        view.addSubview(labelNameProduct)
+        labelNameProduct.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(UIConstants.ConstantsForSingleProductView.insetNameLabelFromTop)
+            make.centerX.equalToSuperview()
+        }
+        
         view.addSubview(imageProduct)
         imageProduct.snp.makeConstraints { make in
             make.size.equalTo(UIConstants.ConstantsForSingleProductView.imageProductSize)
-            make.top.equalToSuperview().inset(UIConstants.ConstantsForSingleProductView.insetImageProductFromTop)
-            make.centerX.equalToSuperview()
-        }
-        
-        view.addSubview(labelNameProduct)
-        labelNameProduct.snp.makeConstraints { make in
-            make.top.equalTo(imageProduct.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.insetLabelFromImage)
-            make.centerX.equalToSuperview()
-        }
-        
-        view.addSubview(addBasketButton)
-        addBasketButton.snp.makeConstraints { make in
-            make.top.equalTo(labelNameProduct.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.insetButtonFromLabel)
+            make.top.equalTo(labelNameProduct.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.insetImageProductFromNameLabel)
             make.centerX.equalToSuperview()
         }
         
         view.addSubview(labelDiscription)
         labelDiscription.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(addBasketButton.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.insetLabelDescriptionFromButton)
+            make.top.equalTo(imageProduct.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.insetLabelDescriptionFromImageProduct)
+            make.leading.equalToSuperview().inset(UIConstants.ConstantsForSingleProductView.insetLabelDescriptionFromLeading)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForSingleProductView.insetLabelDesriptionFromTrailing)
         }
         
         view.addSubview(labelWeight)
         labelWeight.snp.makeConstraints { make in
+            make.top.equalTo(labelDiscription.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.InsetLabelWeightFromLabelDiscriprion)
+            make.leading.equalToSuperview().inset(UIConstants.ConstantsForSingleProductView.insetLabelWeightFromLeading)
+        }
+        
+        view.addSubview(addBasketButton)
+        addBasketButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForSingleProductView.insetAddBasketButtonFromBottom)
             make.centerX.equalToSuperview()
-            make.top.equalTo(labelDiscription.snp.bottom).offset(UIConstants.ConstantsForSingleProductView.insetLabelWeightFromLabelDescription)
+            make.width.equalTo(UIConstants.ConstantsForSingleProductView.widthAddBasketButton)
+            make.height.equalTo(UIConstants.ConstantsForSingleProductView.heightAddBusketButton)
         }
     }
     
@@ -74,14 +75,13 @@ class SingleProductView: BackViewController {
         super.viewDidLoad()
         initializeUI()
         AppSettings.settings.basket
-        
     }
     
     private let backButton: UIButton = {
         let backButton = UIButton()
         backButton.tintColor = .systemGray2
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        backButton.setImage(UIImage(systemName: "clear"), for: .normal)
         backButton.addTarget(self, action: #selector(didTapBackMenu), for: .touchUpInside)
         return backButton
     }()
@@ -95,21 +95,19 @@ class SingleProductView: BackViewController {
         let image = UIImageView()
         image.layer.cornerRadius = UIConstants.ConstantsForSingleProductView.imageProductSize * 0.15
         image.clipsToBounds = true
-        
-        
         return image
     }()
     
     private let labelNameProduct: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        
+        label.font = .systemFont(ofSize: UIConstants.ConstantsForSingleProductView.labelSize, weight: .bold)
         return label
     }()
     
     private let addBasketButton: UIButton = {
         let addBasketButton = UIButton(type: .system)
-        addBasketButton.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductSize, weight: .medium)
+        addBasketButton.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .medium)
         addBasketButton.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         addBasketButton.tintColor = .black
         addBasketButton.layer.cornerRadius = 10
@@ -126,16 +124,15 @@ class SingleProductView: BackViewController {
     }
     
     private let labelDiscription: UILabel = {
-       let label = UILabel()
-        
-        
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .systemGray
         return label
     }()
     
     private let labelWeight: UILabel = {
         let label = UILabel()
-        
-        
+        label.textColor = .systemGray
         return label
     }()
 }

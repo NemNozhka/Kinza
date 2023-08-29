@@ -16,7 +16,6 @@ class BasketViewCell: UITableViewCell {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         labelPrice.text = "\(String(info.priceProduct)) Руб."
-        
     }
     
     func initialize() {
@@ -24,23 +23,23 @@ class BasketViewCell: UITableViewCell {
         selectionStyle = .none //убрали выделение ячейки
         contentView.addSubview(imageProductView)
         imageProductView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetImageProductFromTop)
-            make.leading.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetImageProductFromLeading)
+            make.top.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromTop)
+            make.leading.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromLeading)
             //make.height.equalTo(contentView.snp.width) //высота равна ширине
-            make.size.equalTo(UIConstants.ConstantsForMenuViewCell.imageProductSize)
+            make.size.equalTo(UIConstants.ConstantsForBasketViewCell.imageProductSize)
             make.bottom.equalToSuperview()
         }
         
         contentView.addSubview(labelNameProduct)
         labelNameProduct.snp.makeConstraints { make in
             make.centerY.equalTo(imageProductView)
-            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
-            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
+            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForBasketViewCell.insetNameAndDiscriptionFromImage)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetNameAndDiscriptionFromTrailing)
         }
         contentView.addSubview(labelPrice)
         labelPrice.snp.makeConstraints { make in
-            make.top.equalTo(labelNameProduct.snp.bottom).offset(UIConstants.ConstantsForMenuViewCell.insetButtonFromStackView)
-            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromTrailing)
+            make.top.equalTo(labelNameProduct.snp.bottom).offset(UIConstants.ConstantsForBasketViewCell.insetButtonFromStackView)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetButtonFromTrailing)
         }
     }
     
@@ -65,15 +64,13 @@ class BasketViewCell: UITableViewCell {
     //MARK: - Надпись названия продукта
     private let labelNameProduct: UILabel = {
         let labelNameProduct = UILabel()
-        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductSize, weight: .bold)
+        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .bold)
         labelNameProduct.numberOfLines = 0
         return labelNameProduct
     }()
     
     private let labelPrice: UILabel = {
         let label = UILabel()
-        
-        
         return label
     }()
 }

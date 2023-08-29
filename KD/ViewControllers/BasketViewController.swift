@@ -24,26 +24,11 @@ class BasketViewController: UIViewController {
         tableBasketView.reloadData()
     }
     
-    private enum UIConstants {
-        static let heightTextField: CGFloat = 100
-        static let widthTextField: CGFloat = 100
-        static let insetTopTextFieldFromBottomTableView: CGFloat = 20
-        static let offsetBottomTextFieldFromTopTabBar: CGFloat = 20
-        static let insetTrailingTextFieldFromView: CGFloat = 20
-        static let offsetLeadingTextFieldFromView: CGFloat = 20
-    }
-    
     private let tableBasketView = UITableView()
-    
-    
-    
     
     private let clearBasketButton: UIButton = {
         let button = UIButton()
-        
-        
         button.addTarget(self, action: #selector(tapClearButton), for: .touchUpInside)
-        
         return button
     }()
     
@@ -53,7 +38,6 @@ class BasketViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: AppSettings.basketKey)
         tableBasketView.reloadData()
     }
-    
 }
 
 private extension BasketViewController {
@@ -61,7 +45,7 @@ private extension BasketViewController {
         tableBasketView.bounces = false
         tableBasketView.backgroundColor = .systemGray6
         tableBasketView.dataSource = self
-        //tableBasketView.separatorColor = .clear
+        tableBasketView.separatorColor = .clear
         tableBasketView.register(BasketViewCell.self, forCellReuseIdentifier: String(describing: BasketViewCell.self))
         view.addSubview(tableBasketView)
         tableBasketView.snp.makeConstraints { make in
