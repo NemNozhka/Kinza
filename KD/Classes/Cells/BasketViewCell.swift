@@ -15,7 +15,9 @@ class BasketViewCell: UITableViewCell {
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
-        labelPrice.text = "\(String(info.priceProduct)) Руб."
+        //labelPrice.text = "\(String(info.priceProduct)) Руб."
+        labelPrice.text = String(info.priceProduct)
+        labelQuantityProduct.text = String(info.quantity)
     }
     
     func initialize() {
@@ -23,23 +25,34 @@ class BasketViewCell: UITableViewCell {
         selectionStyle = .none //убрали выделение ячейки
         contentView.addSubview(imageProductView)
         imageProductView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromTop)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromLeading)
-            //make.height.equalTo(contentView.snp.width) //высота равна ширине
             make.size.equalTo(UIConstants.ConstantsForBasketViewCell.imageProductSize)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromBottom)
         }
         
-        contentView.addSubview(labelNameProduct)
-        labelNameProduct.snp.makeConstraints { make in
+        let quantityActionStack = UIStackView()
+        quantityActionStack.addArrangedSubview(lessQuantityProductButton)
+        quantityActionStack.addArrangedSubview(labelQuantityProduct)
+        quantityActionStack.addArrangedSubview(moreQuantityProductButton)
+        quantityActionStack.axis = .horizontal
+        quantityActionStack.spacing = 10
+        
+        let quantityAndPriceStack = UIStackView()
+        quantityAndPriceStack.addArrangedSubview(quantityActionStack)
+        quantityAndPriceStack.addArrangedSubview(labelPrice)
+        quantityAndPriceStack.axis = .horizontal
+        quantityAndPriceStack.spacing = 30
+        
+        let dictionaryStack = UIStackView()
+        dictionaryStack.addArrangedSubview(labelNameProduct)
+        dictionaryStack.addArrangedSubview(quantityAndPriceStack)
+        dictionaryStack.axis = .vertical
+        dictionaryStack.spacing = 30
+        contentView.addSubview(dictionaryStack)
+        dictionaryStack.snp.makeConstraints { make in
             make.centerY.equalTo(imageProductView)
-            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForBasketViewCell.insetNameAndDiscriptionFromImage)
-            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetNameAndDiscriptionFromTrailing)
-        }
-        contentView.addSubview(labelPrice)
-        labelPrice.snp.makeConstraints { make in
-            make.top.equalTo(labelNameProduct.snp.bottom).offset(UIConstants.ConstantsForBasketViewCell.insetButtonFromStackView)
-            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetButtonFromTrailing)
+            make.leading.equalTo(imageProductView.snp.trailing).offset(20)
         }
     }
     
@@ -56,7 +69,7 @@ class BasketViewCell: UITableViewCell {
     //MARK: - изображение продукта
     private let imageProductView: UIImageView = {
         let imageProductView = UIImageView()
-        imageProductView.layer.cornerRadius = UIConstants.ConstantsForMenuViewCell.imageProductSize * 0.15
+        imageProductView.layer.cornerRadius = UIConstants.ConstantsForBasketViewCell.imageProductSize * 0.15
         imageProductView.clipsToBounds = true
         return imageProductView
     }()
@@ -64,7 +77,7 @@ class BasketViewCell: UITableViewCell {
     //MARK: - Надпись названия продукта
     private let labelNameProduct: UILabel = {
         let labelNameProduct = UILabel()
-        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .bold)
+        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForBasketViewCell.labelSize, weight: .bold)
         labelNameProduct.numberOfLines = 0
         return labelNameProduct
     }()
@@ -73,4 +86,41 @@ class BasketViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
+    
+    private let labelQuantityProduct: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let lessQuantityProductButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
+        button.addTarget(self, action: #selector(tapLessQuantityProductButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func tapLessQuantityProductButton() {
+        print("minus")
+        if var number = Int(labelQuantityProduct.text!) {
+            number -= 1
+            labelQuantityProduct.text = String(number)
+            print(number)
+        }
+    }
+    
+    private let moreQuantityProductButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        button.addTarget(self, action: #selector(tapMoreQuantityProductButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func tapMoreQuantityProductButton() {
+        print("plus")
+        if var number = Int(labelQuantityProduct.text!) {
+            number += 1
+            labelQuantityProduct.text = String(number)
+            print(number)
+        }
+    }
 }

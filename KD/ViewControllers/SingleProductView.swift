@@ -10,7 +10,7 @@ import SnapKit
 
 
 
-class SingleProductView: BackViewController {
+class SingleProductView: UIViewController {
     
     func configure(with info: ProductModel) {
         imageProduct.image = UIImage(named: info.imageProduct)

@@ -15,5 +15,6 @@ struct ProductModel: Codable {
     let discriptionProduct: String?
     let itLikeChildren: Bool
     let isSpicy: Bool
+    let quantity: Int
 }
 

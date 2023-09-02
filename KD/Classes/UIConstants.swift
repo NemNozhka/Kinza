@@ -86,6 +86,7 @@ class UIConstants {
         static let imageProductSize: CGFloat = 160
         static let insetImageProductFromTop: CGFloat = 15
         static let insetImageProductFromLeading: CGFloat = 15
+        static let insetImageProductFromBottom: CGFloat = 15
         
         static let likeChildrenLabelFontSize: CGFloat = 11
         static let insetLikeChildrenFromImageProduct: CGFloat = 25

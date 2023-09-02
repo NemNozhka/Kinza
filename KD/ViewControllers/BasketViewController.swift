@@ -24,7 +24,7 @@ class BasketViewController: UIViewController {
         tableBasketView.reloadData()
     }
     
-    private let tableBasketView = UITableView()
+    let tableBasketView = UITableView()
     
     private let clearBasketButton: UIButton = {
         let button = UIButton()
@@ -45,7 +45,7 @@ private extension BasketViewController {
         tableBasketView.bounces = false
         tableBasketView.backgroundColor = .systemGray6
         tableBasketView.dataSource = self
-        tableBasketView.separatorColor = .clear
+        //tableBasketView.separatorColor = .clear
         tableBasketView.register(BasketViewCell.self, forCellReuseIdentifier: String(describing: BasketViewCell.self))
         view.addSubview(tableBasketView)
         tableBasketView.snp.makeConstraints { make in
