@@ -4,9 +4,14 @@
 //
 //  Created by Сергей Ножка on 03.08.2023.
 //
+import Foundation
 
+//let product = AppSettings.settings.basket[2]
+//let id = product.id
 
 struct ProductModel: Codable {
+    
+//    let id: UUID
     
     let imageProduct: String
     let priceProduct: Int
@@ -16,5 +21,8 @@ struct ProductModel: Codable {
     let itLikeChildren: Bool
     let isSpicy: Bool
     let quantity: Int
+//    init() {
+//        self.id = UUID()
+//    }
 }
 

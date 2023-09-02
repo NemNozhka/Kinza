@@ -75,6 +75,7 @@ class SingleProductView: UIViewController {
         super.viewDidLoad()
         initializeUI()
         AppSettings.settings.basket
+        navigationItem.titleView
     }
     
     private let backButton: UIButton = {

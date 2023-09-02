@@ -99,12 +99,18 @@ class BasketViewCell: UITableViewCell {
         return button
     }()
     
-    @objc func tapLessQuantityProductButton() {
+    @objc func tapLessQuantityProductButton(_ sender: UIButton) {
         print("minus")
         if var number = Int(labelQuantityProduct.text!) {
             number -= 1
             labelQuantityProduct.text = String(number)
             print(number)
+            if number == 0 {
+                sender.isEnabled = false
+                // из баскета удаляем продукт с sender.id
+            } else {
+                sender.isEnabled = true
+            }
         }
     }
     
@@ -115,12 +121,25 @@ class BasketViewCell: UITableViewCell {
         return button
     }()
     
-    @objc func tapMoreQuantityProductButton() {
+    @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
         print("plus")
         if var number = Int(labelQuantityProduct.text!) {
             number += 1
             labelQuantityProduct.text = String(number)
             print(number)
+            if number == 0 {
+                sender.isEnabled = false
+                // из баскета удаляем продукт с sender.id
+            } else {
+                sender.isEnabled = true
+            }
+            
+            
+
         }
     }
+}
+
+class ChangeValueButton: UIButton {
+    var id: String?
 }

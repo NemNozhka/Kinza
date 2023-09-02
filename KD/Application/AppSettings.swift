@@ -32,14 +32,11 @@ class AppSettings {
     }
     
     private func loadBasketFromUserDefaults() {
-        if let encodedData = UserDefaults.standard.object(forKey: AppSettings.basketKey) as? Data {
-            do {
-                if let decodedData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(encodedData) as? [ProductModel] {
-                    basket = decodedData
-                }
-            } catch {
-                print("Ошибка при декодировании basket: \(error.localizedDescription)")
-            }
+        do {
+            let data = try Data(contentsOf: basketDataUrl)
+            basket = try JSONDecoder().decode([ProductModel].self, from: data)
+        } catch {
+            basket = []
         }
     }
 }
