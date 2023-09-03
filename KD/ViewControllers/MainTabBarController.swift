@@ -9,13 +9,22 @@ import SnapKit
 import UIKit
 
 class MainTabBarController: UITabBarController {
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
-        
     }
-
+    
+    
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+    
+            self.tabBar.items![1].badgeValue = "\(AppSettings.settings.basket.count)"
+    
+        }
+    
     func makeUI() {
         let MenuViewController = createNavigation(vc: MenuViewController(), itemName: "Меню", imageName: "menucard.fill")
         let BasketViewController = createNavigation(vc: BasketViewController(), itemName: "Корзина", imageName: "basket.fill")
@@ -37,6 +46,7 @@ class MainTabBarController: UITabBarController {
     }
     
     
-
+    
 }
+
 

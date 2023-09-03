@@ -21,6 +21,7 @@ class BasketViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+
         tableBasketView.reloadData()
     }
     
