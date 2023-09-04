@@ -26,6 +26,7 @@
 		EC91E65C2A7C3251004231CC /* BasketViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65B2A7C3251004231CC /* BasketViewCell.swift */; };
 		EC91E65E2A7C325D004231CC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65D2A7C325C004231CC /* MenuViewController.swift */; };
 		EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */; };
+		ECC76A052AA660BB006A90BF /* BasketBadgeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC76A042AA660BB006A90BF /* BasketBadgeValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		EC91E65B2A7C3251004231CC /* BasketViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewCell.swift; sourceTree = "<group>"; };
 		EC91E65D2A7C325C004231CC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
+		ECC76A042AA660BB006A90BF /* BasketBadgeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBadgeValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				EC781FDE2A9B66B1007F8418 /* Menu.swift */,
 				EC02DCEB2A93BDB800E47678 /* Cells */,
 				EC64E9CE2A94B6E200F1E331 /* UIConstants.swift */,
+				ECC76A042AA660BB006A90BF /* BasketBadgeValue.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				EC91E6412A7C316C004231CC /* AppDelegate.swift in Sources */,
 				EC91E6432A7C316C004231CC /* SceneDelegate.swift in Sources */,
 				EC75AA482A7D20EC00B8641D /* LogoView.swift in Sources */,
+				ECC76A052AA660BB006A90BF /* BasketBadgeValue.swift in Sources */,
 				EC91E65A2A7C3245004231CC /* BasketViewController.swift in Sources */,
 				EC64E9CF2A94B6E200F1E331 /* UIConstants.swift in Sources */,
 				EC781FDF2A9B66B1007F8418 /* Menu.swift in Sources */,

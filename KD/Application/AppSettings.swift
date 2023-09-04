@@ -16,6 +16,11 @@ class AppSettings {
     var basket: [ProductModel] = [] {
         didSet {
             print(basket.count)
+            
+            if let clouser = addBadgeValueClosure {
+                clouser()
+            }
+            
             do {
                 let data = try JSONEncoder().encode(basket)
                 try data.write(to: basketDataUrl, options: .atomic)
@@ -24,6 +29,8 @@ class AppSettings {
             }
         }
     }
+    
+    var addBadgeValueClosure: (() -> Void)?
     
     static let basketKey = "BasketKey"
     
