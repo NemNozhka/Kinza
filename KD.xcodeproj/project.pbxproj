@@ -14,7 +14,6 @@
 		EC64E9CF2A94B6E200F1E331 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64E9CE2A94B6E200F1E331 /* UIConstants.swift */; };
 		EC75AA482A7D20EC00B8641D /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC75AA472A7D20EC00B8641D /* LogoView.swift */; };
 		EC781FDF2A9B66B1007F8418 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC781FDE2A9B66B1007F8418 /* Menu.swift */; };
-		EC781FE12A9B700A007F8418 /* BackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC781FE02A9B700A007F8418 /* BackViewController.swift */; };
 		EC91E6412A7C316C004231CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6402A7C316C004231CC /* AppDelegate.swift */; };
 		EC91E6432A7C316C004231CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6422A7C316C004231CC /* SceneDelegate.swift */; };
 		EC91E6452A7C316C004231CC /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E6442A7C316C004231CC /* MainTabBarController.swift */; };
@@ -26,6 +25,8 @@
 		EC91E65C2A7C3251004231CC /* BasketViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65B2A7C3251004231CC /* BasketViewCell.swift */; };
 		EC91E65E2A7C325D004231CC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65D2A7C325C004231CC /* MenuViewController.swift */; };
 		EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */; };
+		ECA96BF32AA8C9CD00B6917A /* TextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA96BF22AA8C9CC00B6917A /* TextFieldController.swift */; };
+		ECC76A072AA749EF006A90BF /* TableFooterViewForBasket.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC76A062AA749EF006A90BF /* TableFooterViewForBasket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,6 @@
 		EC64E9CE2A94B6E200F1E331 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		EC75AA472A7D20EC00B8641D /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		EC781FDE2A9B66B1007F8418 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
-		EC781FE02A9B700A007F8418 /* BackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackViewController.swift; sourceTree = "<group>"; };
 		EC91E63D2A7C316C004231CC /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC91E6402A7C316C004231CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC91E6422A7C316C004231CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +49,8 @@
 		EC91E65B2A7C3251004231CC /* BasketViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewCell.swift; sourceTree = "<group>"; };
 		EC91E65D2A7C325C004231CC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
+		ECA96BF22AA8C9CC00B6917A /* TextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldController.swift; sourceTree = "<group>"; };
+		ECC76A062AA749EF006A90BF /* TableFooterViewForBasket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFooterViewForBasket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,6 @@
 				EC91E6592A7C3245004231CC /* BasketViewController.swift */,
 				EC91E65D2A7C325C004231CC /* MenuViewController.swift */,
 				EC91E6442A7C316C004231CC /* MainTabBarController.swift */,
-				EC781FE02A9B700A007F8418 /* BackViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -83,6 +84,8 @@
 				EC781FDE2A9B66B1007F8418 /* Menu.swift */,
 				EC02DCEB2A93BDB800E47678 /* Cells */,
 				EC64E9CE2A94B6E200F1E331 /* UIConstants.swift */,
+				ECC76A062AA749EF006A90BF /* TableFooterViewForBasket.swift */,
+				ECA96BF22AA8C9CC00B6917A /* TextFieldController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -230,10 +233,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC76A072AA749EF006A90BF /* TableFooterViewForBasket.swift in Sources */,
 				EC5B4D472A991AA40013660D /* ApiKeys.swift in Sources */,
 				E3098B1B2A8EC005009C27CB /* AppSettings.swift in Sources */,
 				EC91E65C2A7C3251004231CC /* BasketViewCell.swift in Sources */,
-				EC781FE12A9B700A007F8418 /* BackViewController.swift in Sources */,
 				EC91E6452A7C316C004231CC /* MainTabBarController.swift in Sources */,
 				EC91E6412A7C316C004231CC /* AppDelegate.swift in Sources */,
 				EC91E6432A7C316C004231CC /* SceneDelegate.swift in Sources */,
@@ -244,6 +247,7 @@
 				EC02DCE82A9380F800E47678 /* SingleProductView.swift in Sources */,
 				EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */,
 				EC331EE62A854E3C00EA73E2 /* FavoriteViewController.swift in Sources */,
+				ECA96BF32AA8C9CD00B6917A /* TextFieldController.swift in Sources */,
 				EC91E65E2A7C325D004231CC /* MenuViewController.swift in Sources */,
 				EC91E6582A7C320D004231CC /* ProductModel.swift in Sources */,
 			);

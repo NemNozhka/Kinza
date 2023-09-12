@@ -9,8 +9,12 @@ import UIKit
 import SnapKit
 
 class MenuViewCell: UITableViewCell {
+
+//    var productInfo: ProductModel?
     
     private let cellID = "cellMenu"
+    
+   
     
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
@@ -19,6 +23,7 @@ class MenuViewCell: UITableViewCell {
         buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
         likeChildrenLabel.isHidden = !info.itLikeChildren
         spicyLabel.isHidden = !info.isSpicy
+        
     }
     
     func initialize() {
@@ -105,7 +110,7 @@ class MenuViewCell: UITableViewCell {
     }()
     
     //MARK: - Кнопка добавления продукта в корзину
-    private let buttonAddBasketProduct: UIButton = {
+    let buttonAddBasketProduct: UIButton = {
         let buttonAddBasketProduct = UIButton(type: .system)
         buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .medium)
         buttonAddBasketProduct.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
@@ -117,9 +122,11 @@ class MenuViewCell: UITableViewCell {
     
     var addProductClosure: (() -> Void)?
     
-    @objc func didTapAddBasketProduct() {
+    @objc func didTapAddBasketProduct(_ sender: UIButton) {
         print("Tap AddBasketProduct")
         addProductClosure?()
+        sender.setTitle("в корзине", for: .normal)
+        sender.isEnabled = false
     }
     
     //MARK: - title дети обожают

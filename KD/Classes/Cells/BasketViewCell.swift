@@ -8,16 +8,31 @@
 import UIKit
 import SnapKit
 
+//protocol BasketViewCellDelegate: AnyObject {
+//    func updateBasket()
+//    func indexPathForCell(_ cell: BasketViewCell) -> IndexPath?
+//    func deleteProductAtIndexPath(_ indexPath: IndexPath)
+//}
+
 class BasketViewCell: UITableViewCell {
+    
+//    weak var delegateBasketCell: BasketViewCellDelegate?
+    
+//    var indexPath: IndexPath?
+//    var productInfo: ProductModel?
+    
+    var sumSingleBasket = 0
+    
+    var productInfo: ProductModel?
     
     private let cellID = "cellBasket"
     
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
-        //labelPrice.text = "\(String(info.priceProduct)) Руб."
+        labelPrice.text = "\(String(info.priceProduct)) Руб."
         labelPrice.text = String(info.priceProduct)
-        labelQuantityProduct.text = String(info.quantity)
+        labelQuantityProduct.text = String(info.quantityInBasket)
     }
     
     func initialize() {
@@ -99,20 +114,23 @@ class BasketViewCell: UITableViewCell {
         return button
     }()
     
+    var lessProductClosure: (() -> Void)?
+    
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
         print("minus")
-        if var number = Int(labelQuantityProduct.text!) {
+        if var number = Int(labelQuantityProduct.text! ?? "0") {
             number -= 1
             labelQuantityProduct.text = String(number)
             print(number)
             if number == 0 {
-                sender.isEnabled = false
-                // из баскета удаляем продукт с sender.id
-            } else {
-                sender.isEnabled = true
+                lessProductClosure?()
+//                if let indexPath = delegateBasketCell?.indexPathForCell(self) {
+//                    delegateBasketCell?.deleteProductAtIndexPath(indexPath)
+//                }
             }
         }
     }
+    
     
     private let moreQuantityProductButton: UIButton = {
         let button = UIButton()
@@ -121,25 +139,23 @@ class BasketViewCell: UITableViewCell {
         return button
     }()
     
+    var moreProductClosure: (() -> Void)?
+    
     @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
         print("plus")
         if var number = Int(labelQuantityProduct.text!) {
             number += 1
             labelQuantityProduct.text = String(number)
             print(number)
-            if number == 0 {
-                sender.isEnabled = false
-                // из баскета удаляем продукт с sender.id
-            } else {
-                sender.isEnabled = true
+            moreProductClosure?()
+            if let price = Int(labelPrice.text!) {
+                sumSingleBasket = number * price
+                print("sumSingleBasket = \(sumSingleBasket)")
             }
-            
-            
-
         }
     }
 }
 
-class ChangeValueButton: UIButton {
-    var id: String?
-}
+//class ChangeValueButton: UIButton {
+//    var id: String?
+//}

@@ -13,9 +13,10 @@ class AppSettings {
     static let settings = AppSettings()
     
     private let basketDataUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("basket.data")
+    var sumBasket = Int()
     var basket: [ProductModel] = [] {
         didSet {
-            print(basket.count)
+            print("Поработали с массивом, теперь basket count = \(basket.count)")
             do {
                 let data = try JSONEncoder().encode(basket)
                 try data.write(to: basketDataUrl, options: .atomic)

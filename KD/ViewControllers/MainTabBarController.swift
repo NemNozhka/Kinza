@@ -9,19 +9,19 @@ import SnapKit
 import UIKit
 
 class MainTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
         
     }
-
+    
     func makeUI() {
         let MenuViewController = createNavigation(vc: MenuViewController(), itemName: "Меню", imageName: "menucard.fill")
         let BasketViewController = createNavigation(vc: BasketViewController(), itemName: "Корзина", imageName: "basket.fill")
         let FavoriteViewController = createNavigation(vc: FavoriteViewController(), itemName: "Любимое", imageName: "heart.fill")
         
-        viewControllers = [MenuViewController, BasketViewController, FavoriteViewController]
+        viewControllers = [MenuViewController, FavoriteViewController, BasketViewController]
     }
     
     func createNavigation(vc: UIViewController, itemName: String, imageName: String) -> UINavigationController {
@@ -35,8 +35,5 @@ class MainTabBarController: UITabBarController {
         
         return navController
     }
-    
-    
-
 }
 

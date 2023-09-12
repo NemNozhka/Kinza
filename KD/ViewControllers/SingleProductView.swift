@@ -82,7 +82,7 @@ class SingleProductView: UIViewController {
         let backButton = UIButton()
         backButton.tintColor = .systemGray2
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.setImage(UIImage(systemName: "clear"), for: .normal)
+        backButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         backButton.addTarget(self, action: #selector(didTapBackMenu), for: .touchUpInside)
         return backButton
     }()

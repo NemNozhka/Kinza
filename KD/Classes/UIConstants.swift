@@ -16,6 +16,7 @@ class UIConstants {
         static let colorLabelLikeChildren: UIColor = UIColor(red: 255.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 100.0 / 100)
         static let colorSpicyLabel: UIColor = UIColor(red: 255.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 100.0 / 100)
         static let colorBackGroundColorButton: UIColor = UIColor(red: 149.0 / 255.0, green: 202.0 / 255.0, blue: 31.0 / 255.0, alpha: 60.0 / 100)
+        static let colorForBackGroundTextField = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     }
     
     enum ConstantsForMenuViewCell {
@@ -39,7 +40,7 @@ class UIConstants {
         static let insetButtonFromBottom: CGFloat = 10
         static let insetButtonFromTrailing: CGFloat = 40
         static let insetButtonTrailing: CGFloat = 90
-        static let widthButton: CGFloat = 90
+        static let widthButton: CGFloat = 110
         static let insetButtonFromStackView: CGFloat = 12
         
         static let nameProductAndPriceProductStackViewSpacing: CGFloat = 12
