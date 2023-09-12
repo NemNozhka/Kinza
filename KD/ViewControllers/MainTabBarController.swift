@@ -18,35 +18,19 @@ class MainTabBarController: UITabBarController {
     
     func makeUI() {
         let menuVC = MenuViewController()
-        let menuItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
-        menuItem.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
-        let navController = UINavigationController(rootViewController: menuVC)
-        navController.tabBarItem = menuItem
+        let menuNavVC = UINavigationController(rootViewController: menuVC)
+        let item0 = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
+        menuNavVC.tabBarItem = item0
         
         let basketVC = BasketViewController()
-        let basketItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 0)
-        basketItem.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
-        navController.tabBarItem = basketItem
+        let basketNavVC = UINavigationController(rootViewController: basketVC)
+        basketNavVC.tabBarItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
         
-        viewControllers = [menuVC, basketVC]
+        let favoriteVC = FavoriteViewController()
+        let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
+        favoriteNavVC.tabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart.fill"), tag: 2)
         
-//        let MenuViewController = createNavigation(vc: MenuViewController(), itemName: "Меню", imageName: "menucard.fill")
-//        let BasketViewController = createNavigation(vc: BasketViewController(), itemName: "Корзина", imageName: "basket.fill")
-//        let FavoriteViewController = createNavigation(vc: FavoriteViewController(), itemName: "Любимое", imageName: "heart.fill")
-//
-//        viewControllers = [MenuViewController, FavoriteViewController, BasketViewController]
-    }
-    
-    func createNavigation(vc: UIViewController, itemName: String, imageName: String) -> UINavigationController {
-        
-        let item = UITabBarItem(title: itemName, image: UIImage(systemName: imageName)?.withAlignmentRectInsets(.init(top: 0, left: 0, bottom: 0, right: 0)), tag: 0)
-        item.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
-        
-        let navController = UINavigationController(rootViewController: vc)
-        navController.tabBarItem = item
-        
-        
-        return navController
+        viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
     }
 }
 
