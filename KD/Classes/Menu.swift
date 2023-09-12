@@ -41,5 +41,8 @@ class Menu {
         ProductModel(imageProduct: "СырБрынза", priceProduct: 660, weight: "750", nameProduct: "Сыр брынза", discriptionProduct: "100 гр.", itLikeChildren: false, isSpicy: false, quantityInBasket: 0, isInBasket: false),
         ProductModel(imageProduct: "Хлеб", priceProduct: 80, weight: "750", nameProduct: "Хлеб", discriptionProduct: "400 гр.", itLikeChildren: false, isSpicy: false, quantityInBasket: 0, isInBasket: false)
     ]
+    
+//    var dict: [String: ProductModel] = [:]
+    
 }
 

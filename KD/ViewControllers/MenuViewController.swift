@@ -58,6 +58,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             print("Изменили isInBasket, теперь =  \(item.isInBasket) \(item.nameProduct)")
             print("Изменинли quantityInBasket, теперь = \(item.quantityInBasket) \(item.nameProduct)")
         }
+        // смотрим есть ли товар в корзине, если есть - пишем в корзине. Если нет - пишем цену
         return cell
     }
     

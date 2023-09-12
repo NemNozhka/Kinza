@@ -7,8 +7,10 @@
 import Foundation
 
 
+
 struct ProductModel: Codable {
     
+    var id = UUID().uuidString
     let imageProduct: String
     let priceProduct: Int
     let weight: String
@@ -18,6 +20,11 @@ struct ProductModel: Codable {
     let isSpicy: Bool
     var quantityInBasket: Int
     var isInBasket: Bool
+    
+//    init() {
+//        AppSettings.settings.menuID[id] = self
+//    }
+    
 }
 
 

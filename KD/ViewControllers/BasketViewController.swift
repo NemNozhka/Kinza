@@ -86,7 +86,8 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
         //        cell.indexPath = indexPath
         //        cell.delegateBasketCell = self
         cell.configure(with: item)
-        cell.lessProductClosure = { [self] in
+        cell.lessProductClosure = { [weak self] in
+            guard let self = self else {return}
             AppSettings.settings.basket.remove(at: indexPath.row)
             basketTableView.beginUpdates()
             basketTableView.deleteRows(at: [indexPath], with: .fade)
@@ -94,7 +95,8 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
             basketTableView.reloadData()
         }
         cell.productInfo = item
-        cell.moreProductClosure = { [self] in
+        cell.moreProductClosure = { [weak self] in
+            guard let self = self else {return}
             if var productInfo = cell.productInfo {
                             productInfo.quantityInBasket += 1
                 print("Изменили quantityInBasket, теперь = \(productInfo.nameProduct) = \(productInfo.quantityInBasket)")

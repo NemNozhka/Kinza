@@ -114,7 +114,6 @@ class TableFooterViewForBasket: UIView {
     private let deliveryLabelMain: UILabel = {
         let label = UILabel()
         label.text = "Выберите способ доставки:"
-        
         return label
     }()
     
@@ -129,7 +128,6 @@ class TableFooterViewForBasket: UIView {
     private let deliveryLabel: UILabel = {
         let label = UILabel()
         label.text = "Доставка курьером"
-        
         return label
     }()
     

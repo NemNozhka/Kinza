@@ -23,7 +23,7 @@ class BasketViewCell: UITableViewCell {
     
     var sumSingleBasket = 0
     
-    var productInfo: ProductModel?
+    var productInfo: String? // сюда записываем id
     
     private let cellID = "cellBasket"
     
@@ -106,7 +106,6 @@ class BasketViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
-    
     private let lessQuantityProductButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
@@ -117,8 +116,10 @@ class BasketViewCell: UITableViewCell {
     var lessProductClosure: (() -> Void)?
     
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
+        guard let id = self.productInfo else {return}
+        AppSettings.settings.removePruduct(id: id)
         print("minus")
-        if var number = Int(labelQuantityProduct.text! ?? "0") {
+        if var number = Int(labelQuantityProduct.text ?? "0") {
             number -= 1
             labelQuantityProduct.text = String(number)
             print(number)
