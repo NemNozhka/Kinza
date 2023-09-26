@@ -9,12 +9,9 @@ import UIKit
 import SnapKit
 
 class MenuViewCell: UITableViewCell {
-
-//    var productInfo: ProductModel?
-    
     private let cellID = "cellMenu"
     
-   
+    var productId: String?
     
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
@@ -121,13 +118,15 @@ class MenuViewCell: UITableViewCell {
     }()
     
     var addProductClosure: (() -> Void)?
+    var updateCellClosure: (() -> Void)?
     
     @objc func didTapAddBasketProduct(_ sender: UIButton) {
         print("Tap AddBasketProduct")
         addProductClosure?()
-        sender.setTitle("в корзине", for: .normal)
-        sender.isEnabled = false
+            updateCellClosure?()
+        
     }
+    
     
     //MARK: - title дети обожают
     private let likeChildrenLabel: UILabel = {

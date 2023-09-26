@@ -14,5 +14,4 @@ class FavoriteViewController: UIViewController {
         view.backgroundColor = .white
         title = "Любимое"
     }
-    
 }

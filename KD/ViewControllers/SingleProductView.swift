@@ -8,8 +8,6 @@
 import UIKit
 import SnapKit
 
-
-
 class SingleProductView: UIViewController {
     
     func configure(with info: ProductModel) {

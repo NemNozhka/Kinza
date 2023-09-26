@@ -19,18 +19,17 @@ class MainTabBarController: UITabBarController {
     func makeUI() {
         let menuVC = MenuViewController()
         let menuNavVC = UINavigationController(rootViewController: menuVC)
-        let item0 = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
-        menuNavVC.tabBarItem = item0
+        menuNavVC.tabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
         
         let basketVC = BasketViewController()
         let basketNavVC = UINavigationController(rootViewController: basketVC)
-        basketNavVC.tabBarItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
+        basketVC.tabBarItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
         
         let favoriteVC = FavoriteViewController()
         let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
         favoriteNavVC.tabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart.fill"), tag: 2)
         
-        viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
+        viewControllers = [menuNavVC, basketVC, favoriteNavVC]
     }
 }
 
@@ -42,7 +41,7 @@ class BasketItem: UITabBarItem {
         badgeColor = .red
         AppSettings.settings.cnahgeBasketClosure = { [weak self] in
             guard let self = self else {return}
-            badgeValue = String(AppSettings.settings.basket.count)
+            self.badgeValue = String(AppSettings.settings.basket.count)
         }
     }
     
@@ -60,7 +59,7 @@ class BasketLabel: UILabel {
             guard let self = self else {return}
             var count = 0
             for product in AppSettings.settings.basket {
-                count += product.priceProduct
+//                count += product.priceProduct
             }
             self.text = String(count)
         }

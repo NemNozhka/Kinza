@@ -8,22 +8,9 @@
 import UIKit
 import SnapKit
 
-//protocol BasketViewCellDelegate: AnyObject {
-//    func updateBasket()
-//    func indexPathForCell(_ cell: BasketViewCell) -> IndexPath?
-//    func deleteProductAtIndexPath(_ indexPath: IndexPath)
-//}
-
 class BasketViewCell: UITableViewCell {
     
-//    weak var delegateBasketCell: BasketViewCellDelegate?
-    
-//    var indexPath: IndexPath?
-//    var productInfo: ProductModel?
-    
-    var sumSingleBasket = 0
-    
-    var productInfo: String? // сюда записываем id
+    var productId: String? // сюда записываем id
     
     private let cellID = "cellBasket"
     
@@ -32,7 +19,6 @@ class BasketViewCell: UITableViewCell {
         labelNameProduct.text = info.nameProduct
         labelPrice.text = "\(String(info.priceProduct)) Руб."
         labelPrice.text = String(info.priceProduct)
-        labelQuantityProduct.text = String(info.quantityInBasket)
     }
     
     func initialize() {
@@ -80,7 +66,6 @@ class BasketViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     //MARK: - изображение продукта
     private let imageProductView: UIImageView = {
         let imageProductView = UIImageView()
@@ -106,6 +91,7 @@ class BasketViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
+    
     private let lessQuantityProductButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
@@ -116,22 +102,8 @@ class BasketViewCell: UITableViewCell {
     var lessProductClosure: (() -> Void)?
     
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
-        guard let id = self.productInfo else {return}
-        AppSettings.settings.removePruduct(id: id)
         print("minus")
-        if var number = Int(labelQuantityProduct.text ?? "0") {
-            number -= 1
-            labelQuantityProduct.text = String(number)
-            print(number)
-            if number == 0 {
-                lessProductClosure?()
-//                if let indexPath = delegateBasketCell?.indexPathForCell(self) {
-//                    delegateBasketCell?.deleteProductAtIndexPath(indexPath)
-//                }
-            }
-        }
     }
-    
     
     private let moreQuantityProductButton: UIButton = {
         let button = UIButton()
@@ -144,17 +116,21 @@ class BasketViewCell: UITableViewCell {
     
     @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
         print("plus")
-        if var number = Int(labelQuantityProduct.text!) {
-            number += 1
-            labelQuantityProduct.text = String(number)
-            print(number)
             moreProductClosure?()
-            if let price = Int(labelPrice.text!) {
-                sumSingleBasket = number * price
-                print("sumSingleBasket = \(sumSingleBasket)")
+    }
+    
+    func updateQuantityLabel() {
+            guard let productId = productId else {
+                labelQuantityProduct.text = "0"
+                return
+            }
+
+        if let productArray = AppSettings.settings.basket[productId] {
+                labelQuantityProduct.text = "\(productArray.count)"
+            } else {
+                labelQuantityProduct.text = "0"
             }
         }
-    }
 }
 
 //class ChangeValueButton: UIButton {

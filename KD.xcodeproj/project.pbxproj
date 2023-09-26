@@ -26,6 +26,9 @@
 		EC91E65E2A7C325D004231CC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65D2A7C325C004231CC /* MenuViewController.swift */; };
 		EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */; };
 		ECA96BF32AA8C9CD00B6917A /* TextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA96BF22AA8C9CC00B6917A /* TextFieldController.swift */; };
+		ECB7B91B2AB71AB5004512EE /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = ECB7B91A2AB71AB5004512EE /* Collections */; };
+		ECB7B91D2AB71AB5004512EE /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = ECB7B91C2AB71AB5004512EE /* DequeModule */; };
+		ECB7B91F2AB71AB5004512EE /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ECB7B91E2AB71AB5004512EE /* OrderedCollections */; };
 		ECC76A072AA749EF006A90BF /* TableFooterViewForBasket.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC76A062AA749EF006A90BF /* TableFooterViewForBasket.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB7B91B2AB71AB5004512EE /* Collections in Frameworks */,
 				EC91E6562A7C3187004231CC /* SnapKit in Frameworks */,
+				ECB7B91F2AB71AB5004512EE /* OrderedCollections in Frameworks */,
+				ECB7B91D2AB71AB5004512EE /* DequeModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +181,9 @@
 			name = KD;
 			packageProductDependencies = (
 				EC91E6552A7C3187004231CC /* SnapKit */,
+				ECB7B91A2AB71AB5004512EE /* Collections */,
+				ECB7B91C2AB71AB5004512EE /* DequeModule */,
+				ECB7B91E2AB71AB5004512EE /* OrderedCollections */,
 			);
 			productName = KD;
 			productReference = EC91E63D2A7C316C004231CC /* KD.app */;
@@ -206,6 +215,7 @@
 			mainGroup = EC91E6342A7C316C004231CC;
 			packageReferences = (
 				EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */,
+				ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = EC91E63E2A7C316C004231CC /* Products */;
 			projectDirPath = "";
@@ -469,6 +479,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -476,6 +494,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		ECB7B91A2AB71AB5004512EE /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		ECB7B91C2AB71AB5004512EE /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		ECB7B91E2AB71AB5004512EE /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

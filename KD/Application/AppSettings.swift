@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import OrderedCollections
 
 
 class AppSettings {
@@ -16,13 +17,12 @@ class AppSettings {
     
     private let basketDataUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("basket.data")
     var sumBasket = Int()
-    var bb: [[String:Int]] = []
-    var basket: [ProductModel] = [] {
+    var basket: OrderedDictionary<String, [ProductModel]> = OrderedDictionary() {
         didSet {
             cnahgeBasketClosure?()
             print("Поработали с массивом, теперь basket count = \(basket.count)")
-            for priduct in basket {
-                print(priduct.id)
+            for product in basket.values.flatMap({ $0 }) {
+                print(product.id)
             }
             do {
                 let data = try JSONEncoder().encode(basket)
@@ -33,13 +33,31 @@ class AppSettings {
         }
     }
     
-    func removePruduct(id: String) {
-        for var product in basket where product.id == id {
-            // удали из массиива
+    
+    func removeItem(id: String) {
+        guard let item = Menu.map[id] else { return }
+
+        if var existingItems = basket[id] {
+            if let index = existingItems.firstIndex(where: { $0.id == item.id }) {
+                if existingItems.count > 1 {
+                    existingItems.remove(at: index)
+                    basket[id] = existingItems
+                } else {
+                    basket[id] = nil
+                }
+            }
         }
     }
-    func addProduct(id: String) {
-//        let pr = BasketPruduct(id: id, count: 0)
+    
+    func addItem(id: String) {
+        guard let item = Menu.map[id] else {
+            return }
+        if var existingItems = basket[id] {
+            existingItems.append(item)
+            basket[id] = existingItems
+        } else {
+            basket[id] = [item]
+        }
     }
     
     static let basketKey = "BasketKey"
@@ -51,24 +69,18 @@ class AppSettings {
     private func loadBasketFromUserDefaults() {
         do {
             let data = try Data(contentsOf: basketDataUrl)
-            basket = try JSONDecoder().decode([ProductModel].self, from: data)
+            basket = try JSONDecoder().decode(OrderedDictionary<String, [ProductModel]>.self, from: data)
         } catch {
-            basket = []
+            basket = [:]
         }
     }
     
-    var menuID: [String: ProductModel] = [:]
+   
     
 }
+
+
 
 // http://telegram.org/myCanal?LJKDFFSD:текст запроса
 
 
-struct BasketPruduct {
-    let id: String
-    let count: Int
-    
-    func getCount(id: String) -> Int {
-        return 1
-    }
-}

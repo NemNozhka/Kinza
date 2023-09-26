@@ -16,19 +16,20 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         setTableView()
         title = "Меню"
+        
     }
     
-    private let tableView = UITableView()
+    private let menuTableView = UITableView()
     func setTableView() {
-        tableView.bounces = false
-        tableView.backgroundColor = .systemGray6
-        tableView.dataSource = self
-        tableView.separatorColor = .clear // cellID
-        tableView.register(MenuViewCell.self, forCellReuseIdentifier: "cellMenu")
-        tableView.delegate = self
-        tableView.dataSource = self
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
+        menuTableView.bounces = false
+        menuTableView.backgroundColor = .systemGray6
+        menuTableView.dataSource = self
+        menuTableView.separatorColor = .clear // cellID
+        menuTableView.register(MenuViewCell.self, forCellReuseIdentifier: "cellMenu")
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        view.addSubview(menuTableView)
+        menuTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -40,25 +41,31 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         var item = Menu.menu[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as? MenuViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as? MenuViewCell else { return UITableViewCell() }
         cell.configure(with: item)
-//        cell.productInfo = item
-        cell.addProductClosure = { [self] in
-//            if var productInfo = cell.productInfo {
-//                productInfo.isInBasket = true
-//                productInfo.quantityInBasket += 1
-//                AppSettings.settings.basket.append(productInfo)
-//                print("quantityInBasket \(productInfo.nameProduct) = \(productInfo.quantityInBasket)")
-//                print("isInBasket \(productInfo.nameProduct) = \(productInfo.isInBasket)")
-//                }
-            item.quantityInBasket += 1
-            item.isInBasket = true
-            AppSettings.settings.basket.append(item)
-            print("Изменили isInBasket, теперь =  \(item.isInBasket) \(item.nameProduct)")
-            print("Изменинли quantityInBasket, теперь = \(item.quantityInBasket) \(item.nameProduct)")
+        var id = item.id
+        cell.productId = item.id
+        cell.addProductClosure = { [weak self] in
+            AppSettings.settings.addItem(id: id)
         }
-        // смотрим есть ли товар в корзине, если есть - пишем в корзине. Если нет - пишем цену
+        cell.updateCellClosure = { [weak self] in
+            guard let productId = cell.productId, let product = Menu.map[cell.productId!] else {
+                    return
+                }
+
+                if let productArray = AppSettings.settings.basket[productId], !productArray.isEmpty {
+                    // Кнопка "В Корзине", неактивная
+                    cell.buttonAddBasketProduct.setTitle("В Корзине", for: .normal)
+                    cell.buttonAddBasketProduct.isEnabled = false
+                } else {
+                    // Кнопка с ценой, активная
+                    cell.buttonAddBasketProduct.setTitle("\(String(item.priceProduct)) Руб.", for: .normal)
+                    cell.buttonAddBasketProduct.isEnabled = true
+                }
+            
+        }
         return cell
     }
     
@@ -68,13 +75,9 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         let singleProductView = SingleProductView()
         singleProductView.configure(with: item)
-        singleProductView.addProductClosure = { [self] in
-            item.quantityInBasket += 1
-            item.isInBasket = true
-            AppSettings.settings.basket.append(item)
-            print("Изменили isInBasket, теперь =  \(item.isInBasket) \(item.nameProduct)")
-            print("Изменинли quantityInBasket, теперь = \(item.quantityInBasket) \(item.nameProduct)")
-            
+        var id = item.id
+        singleProductView.addProductClosure = { [weak self] in
+            AppSettings.settings.addItem(id: id)
         }
         present(singleProductView, animated: true)
     }

@@ -12,7 +12,6 @@ import SnapKit
 //MARK: - TableFooterViewForBasket
 class TableFooterViewForBasket: UIView {
     
-    
     let nameTextField = TextFieldController(placeholder: "Ваше имя")
     let numberPhoneTextField = TextFieldController(placeholder: "Ваш номер телефона")
     let commentTextField = TextFieldController(placeholder: "Комментарий к заказу")
@@ -33,26 +32,26 @@ class TableFooterViewForBasket: UIView {
             make.top.equalTo(nameTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         addSubview(commentTextField)
         commentTextField.translatesAutoresizingMaskIntoConstraints = false
         commentTextField.snp.makeConstraints { make in
             make.top.equalTo(numberPhoneTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         addSubview(deliveryLabelMain)
         deliveryLabelMain.snp.makeConstraints { make in
             make.top.equalTo(commentTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         addSubview(deliveryLabelSubMain)
         deliveryLabelSubMain.snp.makeConstraints { make in
             make.top.equalTo(deliveryLabelMain.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         let deliveryStackView = UIStackView()
         let selfDeliveryStackView = UIStackView()
         let deliveryMethodStackView = UIStackView()
@@ -60,12 +59,12 @@ class TableFooterViewForBasket: UIView {
         deliveryStackView.addArrangedSubview(deliveryRadioButton)
         deliveryStackView.axis = .horizontal
         deliveryStackView.spacing = 155
-
+        
         selfDeliveryStackView.addArrangedSubview(selfDeliveryLabel)
         selfDeliveryStackView.addArrangedSubview(selfDeliveryRadioButton)
         selfDeliveryStackView.axis = .horizontal
         selfDeliveryStackView.spacing = 219
-
+        
         addSubview(deliveryMethodStackView)
         deliveryMethodStackView.addArrangedSubview(deliveryStackView)
         deliveryMethodStackView.addArrangedSubview(selfDeliveryStackView)
@@ -82,7 +81,7 @@ class TableFooterViewForBasket: UIView {
             make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(deliveryMethodStackView.snp.bottom).offset(20)
         }
-
+        
         addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
             make.top.equalTo(adressTextField.snp.bottom).offset(20)
@@ -106,7 +105,7 @@ class TableFooterViewForBasket: UIView {
     
     private let summLabel: UILabel = {
         
-       let label = UILabel()
+        let label = UILabel()
         
         return label
     }()

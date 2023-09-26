@@ -8,9 +8,7 @@
 import UIKit
 import SnapKit
 
-class BasketViewController: UIViewController, UITextFieldDelegate { /*BasketViewCellDelegate*/
-    
-    var sumBasket = 0
+class BasketViewController: UIViewController, UITextFieldDelegate { 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,52 +78,18 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = AppSettings.settings.basket[indexPath.row]
+        let allProducts = Array(AppSettings.settings.basket.values.joined())
+        let product = allProducts[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BasketViewCell.self), for: indexPath) as! BasketViewCell
-        //        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellBasket", for: indexPath) as? BasketViewCell else {return UITableViewCell()}
-        //        cell.indexPath = indexPath
-        //        cell.delegateBasketCell = self
-        cell.configure(with: item)
-        cell.lessProductClosure = { [weak self] in
-            guard let self = self else {return}
-            AppSettings.settings.basket.remove(at: indexPath.row)
-            basketTableView.beginUpdates()
-            basketTableView.deleteRows(at: [indexPath], with: .fade)
-            basketTableView.endUpdates()
-            basketTableView.reloadData()
-        }
-        cell.productInfo = item
+        cell.configure(with: product)
+        cell.productId = product.id
+        cell.updateQuantityLabel()
         cell.moreProductClosure = { [weak self] in
-            guard let self = self else {return}
-            if var productInfo = cell.productInfo {
-                            productInfo.quantityInBasket += 1
-                print("Изменили quantityInBasket, теперь = \(productInfo.nameProduct) = \(productInfo.quantityInBasket)")
-                
-                            }
+            AppSettings.settings.addItem(id: product.id)
         }
         return cell
     }
-    
-    //    func indexPathForCell(_ cell: BasketViewCell) -> IndexPath? {
-    //        if let indexPath = basketTableView.indexPath(for: cell) {
-    //            return indexPath
-    //        }
-    //        return nil
-    //    }
-    
-    //    func deleteProductAtIndexPath(_ indexPath: IndexPath) {
-    //        AppSettings.settings.basket.remove(at: indexPath.row)
-    //
-    //        basketTableView.beginUpdates()
-    //        basketTableView.deleteRows(at: [indexPath], with: .fade)
-    //        basketTableView.endUpdates()
-    //
-    //        updateBasket()
-    //    }
-    
-    //    func updateBasket() {
-    //        basketTableView.reloadData()
-    //    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -112,10 +112,10 @@ class UIConstants {
         static let insetNameAndDiscriptionFromImage: CGFloat = 12
         static let insetNameAndDiscriptionFromTrailing: CGFloat = 12
         
-//        static let insetSpicyLabelFromImageProduct: CGFloat = 25
-//        static let insetSpicyLabelFromImageProductTop: CGFloat = 12
-//        static let spicyLabelLabelFontSize: CGFloat = 11
-//        static let heightSpicyLabel: CGFloat = 25
-//        static let widthSpicyLabel: CGFloat = 70
+        //        static let insetSpicyLabelFromImageProduct: CGFloat = 25
+        //        static let insetSpicyLabelFromImageProductTop: CGFloat = 12
+        //        static let spicyLabelLabelFontSize: CGFloat = 11
+        //        static let heightSpicyLabel: CGFloat = 25
+        //        static let widthSpicyLabel: CGFloat = 70
     }
 }
