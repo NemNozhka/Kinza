@@ -13,7 +13,6 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
-        
     }
     
     func makeUI() {
@@ -48,7 +47,6 @@ class BasketItem: UITabBarItem {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 class BasketLabel: UILabel {
@@ -59,10 +57,9 @@ class BasketLabel: UILabel {
             guard let self = self else {return}
             var count = 0
             for product in AppSettings.settings.basket {
-//                count += product.priceProduct
+                //                count += product.priceProduct
             }
             self.text = String(count)
         }
     }
-    
 }

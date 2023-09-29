@@ -8,15 +8,18 @@
 import UIKit
 import SnapKit
 
-class BasketViewController: UIViewController, UITextFieldDelegate { 
+class BasketViewController: UIViewController, UITextFieldDelegate {
+    
+    let menuViewController = MenuViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        basketTableView.reloadData()
         view.backgroundColor = .white
         title = "Корзина"
-        AppSettings.settings.basket
         initialize()
+        AppSettings.settings.cnahgeBasketClosure = { [weak self] in
+            self?.basketTableView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -24,7 +27,6 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
     }
     
     let basketTableView = UITableView()
-    
     var tableFooterViewForBasket = TableFooterViewForBasket()
     
     private let clearBasketButton: UIButton = {
@@ -38,6 +40,8 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
         AppSettings.settings.basket.removeAll()
         UserDefaults.standard.removeObject(forKey: AppSettings.basketKey)
         basketTableView.reloadData()
+        //        menuViewController.menuTableView.reloadData()
+        NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
     }
 }
 
@@ -73,20 +77,18 @@ private extension BasketViewController {
 }
 
 extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        AppSettings.settings.basket.count
+        AppSettings.settings.basket.keys.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let allProducts = Array(AppSettings.settings.basket.values.joined())
-        let product = allProducts[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BasketViewCell.self), for: indexPath) as! BasketViewCell
-        cell.configure(with: product)
-        cell.productId = product.id
-        cell.updateQuantityLabel()
-        cell.moreProductClosure = { [weak self] in
-            AppSettings.settings.addItem(id: product.id)
+        let key = Array(AppSettings.settings.basket.keys)[indexPath.row]
+        if let products = AppSettings.settings.basket[key], !products.isEmpty {
+            let product = products.first!
+            cell.configure(with: product)
+            cell.labelQuantityProduct.text = "\(products.count)"
         }
         return cell
     }

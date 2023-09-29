@@ -11,15 +11,26 @@ import SnapKit
 
 class MenuViewController: UIViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         title = "Меню"
         
+//        AppSettings.settings.cnahgeBasketClosure = { [weak self] in
+//                    self?.menuTableView.reloadData()
+//            }
+        NotificationCenter.default.addObserver(self, selector: #selector(basketChanged), name: Notification.Name("BasketChanged"), object: nil)
     }
     
-    private let menuTableView = UITableView()
+    @objc func basketChanged() {
+        menuTableView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    let menuTableView = UITableView()
     func setTableView() {
         menuTableView.bounces = false
         menuTableView.backgroundColor = .systemGray6
@@ -42,40 +53,24 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var item = Menu.menu[indexPath.row]
+        let item = Menu.menu[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as? MenuViewCell else { return UITableViewCell() }
         cell.configure(with: item)
-        var id = item.id
-        cell.productId = item.id
+        let id = item.id
         cell.addProductClosure = { [weak self] in
             AppSettings.settings.addItem(id: id)
-        }
-        cell.updateCellClosure = { [weak self] in
-            guard let productId = cell.productId, let product = Menu.map[cell.productId!] else {
-                    return
-                }
-
-                if let productArray = AppSettings.settings.basket[productId], !productArray.isEmpty {
-                    // Кнопка "В Корзине", неактивная
-                    cell.buttonAddBasketProduct.setTitle("В Корзине", for: .normal)
-                    cell.buttonAddBasketProduct.isEnabled = false
-                } else {
-                    // Кнопка с ценой, активная
-                    cell.buttonAddBasketProduct.setTitle("\(String(item.priceProduct)) Руб.", for: .normal)
-                    cell.buttonAddBasketProduct.isEnabled = true
-                }
-            
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let indexPath = tableView.indexPathForSelectedRow  else { return }
-        var item = Menu.menu[indexPath.row]
+        let item = Menu.menu[indexPath.row]
         
         let singleProductView = SingleProductView()
         singleProductView.configure(with: item)
-        var id = item.id
+        let id = item.id
         singleProductView.addProductClosure = { [weak self] in
             AppSettings.settings.addItem(id: id)
         }

@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 import OrderedCollections
 
-
 class AppSettings {
     static let settings = AppSettings()
+    
     
     var cnahgeBasketClosure: (() -> Void)?
     
@@ -33,10 +33,9 @@ class AppSettings {
         }
     }
     
-    
     func removeItem(id: String) {
         guard let item = Menu.map[id] else { return }
-
+        
         if var existingItems = basket[id] {
             if let index = existingItems.firstIndex(where: { $0.id == item.id }) {
                 if existingItems.count > 1 {
@@ -74,9 +73,6 @@ class AppSettings {
             basket = [:]
         }
     }
-    
-   
-    
 }
 
 

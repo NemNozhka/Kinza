@@ -11,16 +11,27 @@ import SnapKit
 class MenuViewCell: UITableViewCell {
     private let cellID = "cellMenu"
     
-    var productId: String?
+    
     
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         labelDiscriptionProduct.text = info.discriptionProduct
-        buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
         likeChildrenLabel.isHidden = !info.itLikeChildren
         spicyLabel.isHidden = !info.isSpicy
         
+        if isProductInBasket(id: info.id) {
+                buttonAddBasketProduct.setTitle("В корзине", for: .normal)
+                buttonAddBasketProduct.isEnabled = false
+            } else {
+                buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
+                buttonAddBasketProduct.isEnabled = true
+            }
+        
+    }
+    
+    func isProductInBasket(id: String) -> Bool {
+        return AppSettings.settings.basket[id] != nil
     }
     
     func initialize() {
@@ -118,15 +129,12 @@ class MenuViewCell: UITableViewCell {
     }()
     
     var addProductClosure: (() -> Void)?
-    var updateCellClosure: (() -> Void)?
     
     @objc func didTapAddBasketProduct(_ sender: UIButton) {
         print("Tap AddBasketProduct")
         addProductClosure?()
-            updateCellClosure?()
         
     }
-    
     
     //MARK: - title дети обожают
     private let likeChildrenLabel: UILabel = {

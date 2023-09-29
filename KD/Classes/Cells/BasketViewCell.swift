@@ -17,8 +17,7 @@ class BasketViewCell: UITableViewCell {
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
-        labelPrice.text = "\(String(info.priceProduct)) Руб."
-        labelPrice.text = String(info.priceProduct)
+        labelPrice.text = "\(String(info.priceProduct)) Руб."        
     }
     
     func initialize() {
@@ -87,7 +86,7 @@ class BasketViewCell: UITableViewCell {
         return label
     }()
     
-    private let labelQuantityProduct: UILabel = {
+    let labelQuantityProduct: UILabel = {
         let label = UILabel()
         return label
     }()
@@ -115,24 +114,9 @@ class BasketViewCell: UITableViewCell {
     var moreProductClosure: (() -> Void)?
     
     @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
+        moreProductClosure?()
         print("plus")
-            moreProductClosure?()
+        
     }
-    
-    func updateQuantityLabel() {
-            guard let productId = productId else {
-                labelQuantityProduct.text = "0"
-                return
-            }
-
-        if let productArray = AppSettings.settings.basket[productId] {
-                labelQuantityProduct.text = "\(productArray.count)"
-            } else {
-                labelQuantityProduct.text = "0"
-            }
-        }
 }
 
-//class ChangeValueButton: UIButton {
-//    var id: String?
-//}

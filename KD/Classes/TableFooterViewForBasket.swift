@@ -104,9 +104,7 @@ class TableFooterViewForBasket: UIView {
     }
     
     private let summLabel: UILabel = {
-        
         let label = UILabel()
-        
         return label
     }()
     
