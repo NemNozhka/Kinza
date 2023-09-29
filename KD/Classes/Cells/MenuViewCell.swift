@@ -11,8 +11,6 @@ import SnapKit
 class MenuViewCell: UITableViewCell {
     private let cellID = "cellMenu"
     
-    
-    
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
@@ -27,7 +25,6 @@ class MenuViewCell: UITableViewCell {
                 buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
                 buttonAddBasketProduct.isEnabled = true
             }
-        
     }
     
     func isProductInBasket(id: String) -> Bool {

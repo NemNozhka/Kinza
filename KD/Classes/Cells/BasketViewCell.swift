@@ -11,13 +11,13 @@ import SnapKit
 class BasketViewCell: UITableViewCell {
     
     var productId: String? // сюда записываем id
-    
     private let cellID = "cellBasket"
     
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
-        labelPrice.text = "\(String(info.priceProduct)) Руб."        
+        labelPrice.text = "\(String(info.priceProduct)) Руб."
+        productId = info.id
     }
     
     func initialize() {
@@ -101,6 +101,7 @@ class BasketViewCell: UITableViewCell {
     var lessProductClosure: (() -> Void)?
     
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
+        lessProductClosure?()
         print("minus")
     }
     
@@ -117,6 +118,19 @@ class BasketViewCell: UITableViewCell {
         moreProductClosure?()
         print("plus")
         
+    }
+    
+    func updateQuantityLabel() {
+        guard let productId = productId else {
+            labelQuantityProduct.text = "0"
+            return
+        }
+
+        if let productArray = AppSettings.settings.basket[productId] {
+            labelQuantityProduct.text = "\(productArray.count)"
+        } else {
+            labelQuantityProduct.text = "0"
+        }
     }
 }
 

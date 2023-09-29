@@ -15,10 +15,6 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         setTableView()
         title = "Меню"
-        
-//        AppSettings.settings.cnahgeBasketClosure = { [weak self] in
-//                    self?.menuTableView.reloadData()
-//            }
         NotificationCenter.default.addObserver(self, selector: #selector(basketChanged), name: Notification.Name("BasketChanged"), object: nil)
     }
     

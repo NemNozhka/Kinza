@@ -14,8 +14,20 @@ class SingleProductView: UIViewController {
         imageProduct.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         labelDiscription.text = info.discriptionProduct
-        addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
+//        addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
         labelWeight.text = "Вес: \(info.weight) гр."
+        
+        if isProductInBasket(id: info.id) {
+            addBasketButton.setTitle("В корзине", for: .normal)
+            addBasketButton.isEnabled = false
+            } else {
+                addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
+                addBasketButton.isEnabled = true
+            }
+    }
+    
+    func isProductInBasket(id: String) -> Bool {
+        return AppSettings.settings.basket[id] != nil
     }
     
     func initializeUI() {
@@ -72,8 +84,6 @@ class SingleProductView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
-        AppSettings.settings.basket
-        navigationItem.titleView
     }
     
     private let backButton: UIButton = {

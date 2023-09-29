@@ -90,6 +90,19 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
             cell.configure(with: product)
             cell.labelQuantityProduct.text = "\(products.count)"
         }
+        cell.lessProductClosure = { [weak self, weak cell] in
+                guard let productId = cell?.productId else { return }
+                AppSettings.settings.removeItem(id: productId)
+                cell?.updateQuantityLabel() // обновление метки количества в ячейке
+                self?.basketTableView.reloadData()
+            }
+            
+            cell.moreProductClosure = { [weak self, weak cell] in
+                guard let productId = cell?.productId else { return }
+                AppSettings.settings.addItem(id: productId)
+                cell?.updateQuantityLabel() // обновление метки количества в ячейке
+                self?.basketTableView.reloadData()
+            }
         return cell
     }
     
