@@ -102,7 +102,10 @@ class BasketViewCell: UITableViewCell {
     
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
         lessProductClosure?()
-        print("minus")
+                print("minus")
+                if let productId = productId {
+                    updateQuantityLabel(productId: productId)
+                }
     }
     
     private let moreQuantityProductButton: UIButton = {
@@ -116,21 +119,16 @@ class BasketViewCell: UITableViewCell {
     
     @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
         moreProductClosure?()
-        print("plus")
+                print("plus")
+                if let productId = productId {
+                    updateQuantityLabel(productId: productId)
+                }
         
     }
     
-    func updateQuantityLabel() {
-        guard let productId = productId else {
-            labelQuantityProduct.text = "0"
-            return
-        }
-
-        if let productArray = AppSettings.settings.basket[productId] {
-            labelQuantityProduct.text = "\(productArray.count)"
-        } else {
-            labelQuantityProduct.text = "0"
-        }
+    func updateQuantityLabel(productId: String) {
+        let quantity = AppSettings.settings.basket[productId]?.count ?? 0
+                labelQuantityProduct.text = "\(quantity)"
     }
 }
 

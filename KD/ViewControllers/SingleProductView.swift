@@ -13,9 +13,8 @@ class SingleProductView: UIViewController {
     func configure(with info: ProductModel) {
         imageProduct.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
-        labelDiscription.text = info.discriptionProduct
-//        addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
-        labelWeight.text = "Вес: \(info.weight) гр."
+        labelDiscription.text = info.descriptionProduct
+        labelWeight.text = "Вес: \(info.weightProduct) гр."
         
         if isProductInBasket(id: info.id) {
             addBasketButton.setTitle("В корзине", for: .normal)
@@ -129,6 +128,7 @@ class SingleProductView: UIViewController {
     @objc func didTapAddBasketButton() {
         print("Tap AddBasketProduct")
         addProductClosure?()
+        NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
         dismiss(animated: true)
     }
     

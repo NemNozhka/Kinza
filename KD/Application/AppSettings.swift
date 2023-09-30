@@ -12,7 +12,6 @@ import OrderedCollections
 class AppSettings {
     static let settings = AppSettings()
     
-    
     var cnahgeBasketClosure: (() -> Void)?
     
     private let basketDataUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("basket.data")
@@ -34,29 +33,25 @@ class AppSettings {
     }
     
     func removeItem(id: String) {
-        guard let item = Menu.map[id] else { return }
-        
-        if var existingItems = basket[id] {
-            if let index = existingItems.firstIndex(where: { $0.id == item.id }) {
-                if existingItems.count > 1 {
-                    existingItems.remove(at: index)
-                    basket[id] = existingItems
-                } else {
-                    basket[id] = nil
-                }
+        guard basket.keys.contains(id), let existingItems = basket[id] else { return }
+
+            if existingItems.count > 1 {
+                basket[id] = Array(existingItems.dropLast())
+            } else {
+                basket[id] = nil
             }
-        }
+        NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
     }
     
     func addItem(id: String) {
-        guard let item = Menu.map[id] else {
-            return }
-        if var existingItems = basket[id] {
-            existingItems.append(item)
-            basket[id] = existingItems
-        } else {
-            basket[id] = [item]
-        }
+        guard let newItem = Menu.map[id] else { return }
+           
+           if let existingItems = basket[id] {
+               basket[id] = existingItems + [newItem]
+           } else {
+               basket[id] = [newItem]
+           }
+        NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
     }
     
     static let basketKey = "BasketKey"
@@ -69,7 +64,9 @@ class AppSettings {
         do {
             let data = try Data(contentsOf: basketDataUrl)
             basket = try JSONDecoder().decode(OrderedDictionary<String, [ProductModel]>.self, from: data)
+            
         } catch {
+            print("Ошибка при загрузке корзины: \(error)")
             basket = [:]
         }
     }

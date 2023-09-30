@@ -12,42 +12,58 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(basketChanged), name: Notification.Name("BasketChanged"), object: nil)
+        setupTabBarControllers()
+        updateBadgeValue()
     }
     
-    func makeUI() {
+    @objc func basketChanged() {
+        updateBadgeValue()
+    }
+
+    func updateBadgeValue() {
+        let itemCount = AppSettings.settings.basket.values.reduce(0) { $0 + $1.count }
+        self.tabBar.items?[1].badgeValue = "\(itemCount)"
+    }
+    
+    func setupTabBarControllers() {
         let menuVC = MenuViewController()
         let menuNavVC = UINavigationController(rootViewController: menuVC)
         menuNavVC.tabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
         
         let basketVC = BasketViewController()
         let basketNavVC = UINavigationController(rootViewController: basketVC)
-        basketVC.tabBarItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
+//        basketNavVC.tabBarItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
+        basketNavVC.tabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
+        
         
         let favoriteVC = FavoriteViewController()
         let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
         favoriteNavVC.tabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart.fill"), tag: 2)
         
-        viewControllers = [menuNavVC, basketVC, favoriteNavVC]
+        viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
     }
 }
 
-class BasketItem: UITabBarItem {
-    
-    override init() {
-        super.init()
-        badgeValue = String(AppSettings.settings.basket.count)
-        badgeColor = .red
-        AppSettings.settings.cnahgeBasketClosure = { [weak self] in
-            guard let self = self else {return}
-            self.badgeValue = String(AppSettings.settings.basket.count)
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+//class BasketItem: UITabBarItem {
+//
+//    override init() {
+//        super.init()
+//        badgeValue = String(AppSettings.settings.basket.count)
+//        badgeColor = .red
+//        AppSettings.settings.cnahgeBasketClosure = { [weak self] in
+//            guard let self = self else {return}
+//            self.badgeValue = String(AppSettings.settings.basket.count)
+//        }
+//
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//
+//}
 
 class BasketLabel: UILabel {
     

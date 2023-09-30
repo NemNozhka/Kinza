@@ -14,7 +14,7 @@ class MenuViewCell: UITableViewCell {
     func configure(with info: ProductModel) {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
-        labelDiscriptionProduct.text = info.discriptionProduct
+        labelDiscriptionProduct.text = info.descriptionProduct
         likeChildrenLabel.isHidden = !info.itLikeChildren
         spicyLabel.isHidden = !info.isSpicy
         

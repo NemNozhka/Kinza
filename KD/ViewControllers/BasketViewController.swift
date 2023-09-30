@@ -10,13 +10,13 @@ import SnapKit
 
 class BasketViewController: UIViewController, UITextFieldDelegate {
     
-    let menuViewController = MenuViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Корзина"
         initialize()
+        basketTableView.reloadData()
         AppSettings.settings.cnahgeBasketClosure = { [weak self] in
             self?.basketTableView.reloadData()
         }
@@ -40,7 +40,6 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
         AppSettings.settings.basket.removeAll()
         UserDefaults.standard.removeObject(forKey: AppSettings.basketKey)
         basketTableView.reloadData()
-        //        menuViewController.menuTableView.reloadData()
         NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
     }
 }
@@ -91,18 +90,18 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
             cell.labelQuantityProduct.text = "\(products.count)"
         }
         cell.lessProductClosure = { [weak self, weak cell] in
-                guard let productId = cell?.productId else { return }
-                AppSettings.settings.removeItem(id: productId)
-                cell?.updateQuantityLabel() // обновление метки количества в ячейке
-                self?.basketTableView.reloadData()
-            }
-            
-            cell.moreProductClosure = { [weak self, weak cell] in
-                guard let productId = cell?.productId else { return }
-                AppSettings.settings.addItem(id: productId)
-                cell?.updateQuantityLabel() // обновление метки количества в ячейке
-                self?.basketTableView.reloadData()
-            }
+            guard let productId = cell?.productId else { return }
+            AppSettings.settings.removeItem(id: productId)
+            cell?.updateQuantityLabel(productId: productId)
+            self?.basketTableView.reloadData()
+        }
+        
+        cell.moreProductClosure = { [weak self, weak cell] in
+            guard let productId = cell?.productId else { return }
+            AppSettings.settings.addItem(id: productId)
+            cell?.updateQuantityLabel(productId: productId)
+            self?.basketTableView.reloadData()
+        }
         return cell
     }
     
