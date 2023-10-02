@@ -35,7 +35,7 @@ class UIConstants {
         static let labelNameProductFontSize: CGFloat = 14
         
         static let spacingBetweenNameAndDiscription: CGFloat = 10
-        static let labelDiscriptionProductSize: CGFloat = 15
+        static let labelDiscriptionProductSize: CGFloat = 12
         
         static let insetButtonFromBottom: CGFloat = 10
         static let insetButtonFromTrailing: CGFloat = 40

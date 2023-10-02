@@ -16,7 +16,7 @@ class SingleProductView: UIViewController {
         labelDiscription.text = info.descriptionProduct
         labelWeight.text = "Вес: \(info.weightProduct) гр."
         
-        if isProductInBasket(id: info.id) {
+        if isProductInBasket(id: info.idProduct) {
             addBasketButton.setTitle("В корзине", for: .normal)
             addBasketButton.isEnabled = false
             } else {

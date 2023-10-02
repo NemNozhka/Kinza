@@ -8,7 +8,7 @@ import Foundation
 
 struct ProductModel: Codable {
     
-    var id = UUID().uuidString
+    let idProduct: String
     let imageProduct: String
     let priceProduct: Int
     let weightProduct: String
@@ -17,7 +17,8 @@ struct ProductModel: Codable {
     let itLikeChildren: Bool
     let isSpicy: Bool
     
-    init(imageProduct: String, priceProduct: Int, weightProduct: String, nameProduct: String, descriptionProduct: String, itLikeChildren: Bool, isSpicy: Bool) {
+    init(idProduct: String, imageProduct: String, priceProduct: Int, weightProduct: String, nameProduct: String, descriptionProduct: String, itLikeChildren: Bool, isSpicy: Bool) {
+        self.idProduct = idProduct
         self.imageProduct = imageProduct
         self.priceProduct = priceProduct
         self.weightProduct = weightProduct

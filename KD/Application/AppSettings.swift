@@ -21,7 +21,7 @@ class AppSettings {
             cnahgeBasketClosure?()
             print("Поработали с массивом, теперь basket count = \(basket.count)")
             for product in basket.values.flatMap({ $0 }) {
-                print(product.id)
+                print(product.idProduct)
             }
             do {
                 let data = try JSONEncoder().encode(basket)

@@ -52,7 +52,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         let item = Menu.menu[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as? MenuViewCell else { return UITableViewCell() }
         cell.configure(with: item)
-        let id = item.id
+        let id = item.idProduct
         cell.addProductClosure = { [weak self] in
             AppSettings.settings.addItem(id: id)
             tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -66,7 +66,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         let singleProductView = SingleProductView()
         singleProductView.configure(with: item)
-        let id = item.id
+        let id = item.idProduct
         singleProductView.addProductClosure = { [weak self] in
             AppSettings.settings.addItem(id: id)
         }

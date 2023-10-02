@@ -18,7 +18,7 @@ class MenuViewCell: UITableViewCell {
         likeChildrenLabel.isHidden = !info.itLikeChildren
         spicyLabel.isHidden = !info.isSpicy
         
-        if isProductInBasket(id: info.id) {
+        if isProductInBasket(id: info.idProduct) {
                 buttonAddBasketProduct.setTitle("В корзине", for: .normal)
                 buttonAddBasketProduct.isEnabled = false
             } else {

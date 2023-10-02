@@ -29,17 +29,23 @@ class MainTabBarController: UITabBarController {
     func setupTabBarControllers() {
         let menuVC = MenuViewController()
         let menuNavVC = UINavigationController(rootViewController: menuVC)
-        menuNavVC.tabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
+        let menuTabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard"), selectedImage: UIImage(systemName: "menucard.fill"))
+        menuNavVC.tabBarItem = menuTabBarItem
+//        menuNavVC.tabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
         
         let basketVC = BasketViewController()
         let basketNavVC = UINavigationController(rootViewController: basketVC)
-//        basketNavVC.tabBarItem = BasketItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
-        basketNavVC.tabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
+        let basketTabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket"), selectedImage: UIImage(systemName: "basket.fill"))
+        basketNavVC.tabBarItem = basketTabBarItem
+//        basketNavVC.tabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
         
         
         let favoriteVC = FavoriteViewController()
         let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
-        favoriteNavVC.tabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart.fill"), tag: 2)
+        let favoriteTabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
+        favoriteNavVC.tabBarItem = favoriteTabBarItem
+
+//        favoriteNavVC.tabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart.fill"), tag: 2)
         
         viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
     }
