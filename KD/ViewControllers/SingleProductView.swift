@@ -19,10 +19,10 @@ class SingleProductView: UIViewController {
         if isProductInBasket(id: info.idProduct) {
             addBasketButton.setTitle("В корзине", for: .normal)
             addBasketButton.isEnabled = false
-            } else {
-                addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
-                addBasketButton.isEnabled = true
-            }
+        } else {
+            addBasketButton.setTitle("Добавить в корзину за \(info.priceProduct) Р.", for: .normal)
+            addBasketButton.isEnabled = true
+        }
     }
     
     func isProductInBasket(id: String) -> Bool {

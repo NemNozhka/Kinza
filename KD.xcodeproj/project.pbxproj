@@ -10,6 +10,8 @@
 		E3098B1B2A8EC005009C27CB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3098B1A2A8EC005009C27CB /* AppSettings.swift */; };
 		EC02DCE82A9380F800E47678 /* SingleProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02DCE72A9380F800E47678 /* SingleProductView.swift */; };
 		EC331EE62A854E3C00EA73E2 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC331EE52A854E3C00EA73E2 /* FavoriteViewController.swift */; };
+		EC3326392ACD977B00D7DE62 /* TelegramBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3326382ACD977B00D7DE62 /* TelegramBot.swift */; };
+		EC33263C2ACD984600D7DE62 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EC33263B2ACD984600D7DE62 /* Alamofire */; };
 		EC5B4D472A991AA40013660D /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5B4D462A991AA40013660D /* ApiKeys.swift */; };
 		EC64E9CF2A94B6E200F1E331 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC64E9CE2A94B6E200F1E331 /* UIConstants.swift */; };
 		EC75AA482A7D20EC00B8641D /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC75AA472A7D20EC00B8641D /* LogoView.swift */; };
@@ -36,6 +38,7 @@
 		E3098B1A2A8EC005009C27CB /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		EC02DCE72A9380F800E47678 /* SingleProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProductView.swift; sourceTree = "<group>"; };
 		EC331EE52A854E3C00EA73E2 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		EC3326382ACD977B00D7DE62 /* TelegramBot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBot.swift; sourceTree = "<group>"; };
 		EC5B4D462A991AA40013660D /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		EC64E9CE2A94B6E200F1E331 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		EC75AA472A7D20EC00B8641D /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC33263C2ACD984600D7DE62 /* Alamofire in Frameworks */,
 				ECB7B91B2AB71AB5004512EE /* Collections in Frameworks */,
 				EC91E6562A7C3187004231CC /* SnapKit in Frameworks */,
 				ECB7B91F2AB71AB5004512EE /* OrderedCollections in Frameworks */,
@@ -149,6 +153,7 @@
 				EC91E6422A7C316C004231CC /* SceneDelegate.swift */,
 				EC5B4D462A991AA40013660D /* ApiKeys.swift */,
 				E3098B1A2A8EC005009C27CB /* AppSettings.swift */,
+				EC3326382ACD977B00D7DE62 /* TelegramBot.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				ECB7B91A2AB71AB5004512EE /* Collections */,
 				ECB7B91C2AB71AB5004512EE /* DequeModule */,
 				ECB7B91E2AB71AB5004512EE /* OrderedCollections */,
+				EC33263B2ACD984600D7DE62 /* Alamofire */,
 			);
 			productName = KD;
 			productReference = EC91E63D2A7C316C004231CC /* KD.app */;
@@ -216,6 +222,7 @@
 			packageReferences = (
 				EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */,
+				EC33263A2ACD984600D7DE62 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = EC91E63E2A7C316C004231CC /* Products */;
 			projectDirPath = "";
@@ -255,6 +262,7 @@
 				EC64E9CF2A94B6E200F1E331 /* UIConstants.swift in Sources */,
 				EC781FDF2A9B66B1007F8418 /* Menu.swift in Sources */,
 				EC02DCE82A9380F800E47678 /* SingleProductView.swift in Sources */,
+				EC3326392ACD977B00D7DE62 /* TelegramBot.swift in Sources */,
 				EC91E6602A7C32B8004231CC /* MenuViewCell.swift in Sources */,
 				EC331EE62A854E3C00EA73E2 /* FavoriteViewController.swift in Sources */,
 				ECA96BF32AA8C9CD00B6917A /* TextFieldController.swift in Sources */,
@@ -471,6 +479,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EC33263A2ACD984600D7DE62 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
 		EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -490,6 +506,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EC33263B2ACD984600D7DE62 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC33263A2ACD984600D7DE62 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		EC91E6552A7C3187004231CC /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EC91E6542A7C3187004231CC /* XCRemoteSwiftPackageReference "SnapKit" */;

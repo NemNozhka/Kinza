@@ -18,7 +18,26 @@ class BasketViewCell: UITableViewCell {
         labelNameProduct.text = info.nameProduct
         labelPrice.text = "\(String(info.priceProduct)) Руб."
         productId = info.idProduct
+        updatePriceLabel(productId: info.idProduct)
     }
+    
+    func updatePriceLabel(productId: String) {
+        guard let productArray = AppSettings.settings.basket[productId],
+              let pricePerItem = productArray.first?.priceProduct else {
+            return
+        }
+        let totalQuantity = productArray.count
+        let totalPrice = pricePerItem * totalQuantity
+        labelPrice.text = "\(totalPrice) Руб."
+    }
+    
+    func updateQuantityLabel(productId: String) {
+        let quantity = AppSettings.settings.basket[productId]?.count ?? 0
+        labelQuantityProduct.text = "\(quantity)"
+        updatePriceLabel(productId: productId)  // вызов метода обновления цены
+    }
+    
+    
     
     func initialize() {
         contentView.backgroundColor = .systemGray6
@@ -53,6 +72,7 @@ class BasketViewCell: UITableViewCell {
         dictionaryStack.snp.makeConstraints { make in
             make.centerY.equalTo(imageProductView)
             make.leading.equalTo(imageProductView.snp.trailing).offset(20)
+            make.trailing.equalToSuperview().inset(20)
         }
     }
     
@@ -102,10 +122,10 @@ class BasketViewCell: UITableViewCell {
     
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
         lessProductClosure?()
-                print("minus")
-                if let productId = productId {
-                    updateQuantityLabel(productId: productId)
-                }
+        print("minus")
+        if let productId = productId {
+            updateQuantityLabel(productId: productId)
+        }
     }
     
     private let moreQuantityProductButton: UIButton = {
@@ -119,16 +139,12 @@ class BasketViewCell: UITableViewCell {
     
     @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
         moreProductClosure?()
-                print("plus")
-                if let productId = productId {
-                    updateQuantityLabel(productId: productId)
-                }
+        print("plus")
+        if let productId = productId {
+            updateQuantityLabel(productId: productId)
+        }
         
     }
     
-    func updateQuantityLabel(productId: String) {
-        let quantity = AppSettings.settings.basket[productId]?.count ?? 0
-                labelQuantityProduct.text = "\(quantity)"
-    }
 }
 

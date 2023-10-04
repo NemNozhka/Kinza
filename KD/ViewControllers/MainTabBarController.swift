@@ -31,45 +31,22 @@ class MainTabBarController: UITabBarController {
         let menuNavVC = UINavigationController(rootViewController: menuVC)
         let menuTabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard"), selectedImage: UIImage(systemName: "menucard.fill"))
         menuNavVC.tabBarItem = menuTabBarItem
-//        menuNavVC.tabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard.fill"), tag: 0)
         
         let basketVC = BasketViewController()
         let basketNavVC = UINavigationController(rootViewController: basketVC)
         let basketTabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket"), selectedImage: UIImage(systemName: "basket.fill"))
         basketNavVC.tabBarItem = basketTabBarItem
-//        basketNavVC.tabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket.fill"), tag: 1)
-        
         
         let favoriteVC = FavoriteViewController()
         let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
         let favoriteTabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
         favoriteNavVC.tabBarItem = favoriteTabBarItem
 
-//        favoriteNavVC.tabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart.fill"), tag: 2)
-        
         viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
     }
 }
 
-//class BasketItem: UITabBarItem {
-//
-//    override init() {
-//        super.init()
-//        badgeValue = String(AppSettings.settings.basket.count)
-//        badgeColor = .red
-//        AppSettings.settings.cnahgeBasketClosure = { [weak self] in
-//            guard let self = self else {return}
-//            self.badgeValue = String(AppSettings.settings.basket.count)
-//        }
-//
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//
-//}
+
 
 class BasketLabel: UILabel {
     

@@ -22,8 +22,26 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableFooterViewForBasket.updateSumLabel()
         basketTableView.reloadData()
     }
+    
+    func updateTotalPrice() {
+        let totalSum = AppSettings.getTotalPrice()
+        tableFooterViewForBasket.summLabel.text = "Сумма заказа: \(totalSum) Руб."
+        tableFooterViewForBasket.orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
+        tableFooterViewForBasket.priceDeliveryLabel.text = "Стоимость доставки 100 Руб. Для бесплатной доставки добавьте корзину товара на сумму \(AppSettings.minimalPriceDelivery - totalSum) Руб."
+        if totalSum > AppSettings.minimalPriceDelivery {
+            tableFooterViewForBasket.priceDeliveryLabel.isHidden = true
+            tableFooterViewForBasket.orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
+        } else {
+            tableFooterViewForBasket.priceDeliveryLabel.isHidden = false
+            tableFooterViewForBasket.orderButton.setTitle("Оформить заказ на \(totalSum + AppSettings.priceDelivery) Руб.", for: .normal)
+        }
+    }
+    
+    
     
     let basketTableView = UITableView()
     var tableFooterViewForBasket = TableFooterViewForBasket()
@@ -93,6 +111,7 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
             AppSettings.settings.removeItem(id: productId)
             cell?.updateQuantityLabel(productId: productId)
             self?.basketTableView.reloadData()
+            self?.updateTotalPrice()
         }
         
         cell.moreProductClosure = { [weak self, weak cell] in
@@ -100,6 +119,7 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
             AppSettings.settings.addItem(id: productId)
             cell?.updateQuantityLabel(productId: productId)
             self?.basketTableView.reloadData()
+            self?.updateTotalPrice()
         }
         return cell
     }

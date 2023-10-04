@@ -17,13 +17,41 @@ class TableFooterViewForBasket: UIView {
     let commentTextField = TextFieldController(placeholder: "Комментарий к заказу")
     let adressTextField = TextFieldController(placeholder: "Адресс доставки")
     
+    func updateSumLabel() {
+        let totalSum = AppSettings.getTotalPrice()
+        summLabel.text = "Сумма заказа: \(totalSum) Руб."
+        orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
+        priceDeliveryLabel.text = "Стоимость доставки 100 Руб. Для бесплатной доставки добавьте корзину товара на сумму \(AppSettings.minimalPriceDelivery - totalSum) Руб."
+        if totalSum > AppSettings.minimalPriceDelivery {
+            priceDeliveryLabel.isHidden = true
+            orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
+            
+        } else {
+            priceDeliveryLabel.isHidden = false
+            orderButton.setTitle("Оформить заказ на \(totalSum + AppSettings.priceDelivery) Руб.", for: .normal)
+        }
+    }
+    
     //MARK: - configure
     func configure() {
+        addSubview(summLabel)
+        summLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+        }
+        
+        addSubview(priceDeliveryLabel)
+        priceDeliveryLabel.snp.makeConstraints { make in
+            make.top.equalTo(summLabel.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
         
         addSubview(nameTextField)
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(priceDeliveryLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
         addSubview(numberPhoneTextField)
@@ -53,17 +81,17 @@ class TableFooterViewForBasket: UIView {
         }
         
         let deliveryStackView = UIStackView()
-        let selfDeliveryStackView = UIStackView()
-        let deliveryMethodStackView = UIStackView()
-        deliveryStackView.addArrangedSubview(deliveryLabel)
         deliveryStackView.addArrangedSubview(deliveryRadioButton)
+        deliveryStackView.addArrangedSubview(deliveryLabel)
         deliveryStackView.axis = .horizontal
-        deliveryStackView.spacing = 155
+        deliveryStackView.spacing = 20
         
-        selfDeliveryStackView.addArrangedSubview(selfDeliveryLabel)
+        let selfDeliveryStackView = UIStackView()
         selfDeliveryStackView.addArrangedSubview(selfDeliveryRadioButton)
+        selfDeliveryStackView.addArrangedSubview(selfDeliveryLabel)
         selfDeliveryStackView.axis = .horizontal
-        selfDeliveryStackView.spacing = 219
+        selfDeliveryStackView.spacing = 20
+        let deliveryMethodStackView = UIStackView()
         
         addSubview(deliveryMethodStackView)
         deliveryMethodStackView.addArrangedSubview(deliveryStackView)
@@ -93,7 +121,7 @@ class TableFooterViewForBasket: UIView {
     //MARK: - initialize
     convenience init() {
         self.init(frame: .zero)
-        frame.size.height = 600
+        frame.size.height = 650
         configure()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -103,8 +131,15 @@ class TableFooterViewForBasket: UIView {
         super.touchesBegan(touches, with: event)
     }
     
-    private let summLabel: UILabel = {
+    let summLabel: UILabel = {
         let label = UILabel()
+        label.text = "Сумма заказа:"
+        return label
+    }()
+    
+    let priceDeliveryLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
         return label
     }()
     
@@ -173,9 +208,57 @@ class TableFooterViewForBasket: UIView {
         buttonAddBasketProduct.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         buttonAddBasketProduct.tintColor = .black
         buttonAddBasketProduct.layer.cornerRadius = 10
-        //        buttonAddBasketProduct.addTarget(self, action: #selector(didTapAddBasketProduct), for: .touchUpInside)
+        buttonAddBasketProduct.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
         return buttonAddBasketProduct
     }()
+    
+    @objc func orderButtonTapped() {
+        sendOrderDetailsToTelegram()
+    }
+    
+    func sendOrderDetailsToTelegram() {
+        
+        let orderDetails = gatherOrderDetails()
+        TelegramBot.botTG.sendMessage(orderDetails) { result in
+            switch result {
+            case .success(let message):
+                print(message)
+            case .failure(let error):
+                print("Failed to send message: \(error)")
+            }
+        }
+    }
+    
+    func gatherOrderDetails() -> String {
+        let totalSum = AppSettings.getTotalPrice()
+        
+        var productsDetails = ""
+        for (key, products) in AppSettings.settings.basket {
+            guard let product = products.first else { continue }
+            let quantity = products.count
+            let productDetail = "\(product.nameProduct) - \(quantity) шт.\n"
+            productsDetails.append(contentsOf: productDetail)
+        }
+        
+        let userName = nameTextField.text ?? "Не указано"
+        let userPhone = numberPhoneTextField.text ?? "Не указано"
+        let userComment = commentTextField.text ?? "Без комментариев"
+        let deliveryAddress = adressTextField.text ?? "Не указано"
+        let deliveryMethod = usedDelivery ? "Доставка курьером" : "Самовывоз"
+        
+        let orderDetails = """
+        Заказ:
+        \(productsDetails)
+        Имя: \(userName)
+        Телефон: \(userPhone)
+        Комментарий: \(userComment)
+        Способ доставки: \(deliveryMethod)
+        Адрес доставки: \(deliveryAddress)
+        Сумма заказа: \(totalSum) Руб.
+        """
+        
+        return orderDetails
+    }
 }
 
 

@@ -54,6 +54,19 @@ class AppSettings {
         NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
     }
     
+    static func getTotalPrice() -> Int {
+            var totalPrice = 0
+            for productsArray in settings.basket.values {
+                for product in productsArray {
+                    totalPrice += product.priceProduct
+                }
+            }
+            return totalPrice
+        }
+    
+    static let priceDelivery = 100
+    static let minimalPriceDelivery = 800
+    
     static let basketKey = "BasketKey"
     
     init() {
@@ -74,6 +87,6 @@ class AppSettings {
 
 
 
-// http://telegram.org/myCanal?LJKDFFSD:текст запроса
+
 
 
