@@ -13,7 +13,7 @@ import SnapKit
 class TableFooterViewForBasket: UIView {
     
     let nameTextField = TextFieldController(placeholder: "Ваше имя")
-    let numberPhoneTextField = TextFieldController(placeholder: "Ваш номер телефона")
+    let numberPhoneTextField = TextFieldController(placeholder: "Ваш номер телефона", isPhoneNumberField: true)
     let commentTextField = TextFieldController(placeholder: "Комментарий к заказу")
     let adressTextField = TextFieldController(placeholder: "Адресс доставки")
     
