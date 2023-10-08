@@ -47,6 +47,10 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         Menu.menu.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIConstants.ConstantsForMenuViewCell.cellHeight  // ваша фиксированная высота ячейки
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = Menu.menu[indexPath.row]

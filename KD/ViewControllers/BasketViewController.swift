@@ -23,42 +23,16 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableFooterViewForBasket.updateSumLabel()
+//        tableFooterViewForBasket.updateSumLabel()
         basketTableView.reloadData()
     }
     
-    func updateTotalPrice() {
-        let totalSum = AppSettings.getTotalPrice()
-        tableFooterViewForBasket.summLabel.text = "Сумма заказа: \(totalSum) Руб."
-        tableFooterViewForBasket.orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
-        tableFooterViewForBasket.priceDeliveryLabel.text = "Стоимость доставки 100 Руб. Для бесплатной доставки добавьте корзину товара на сумму \(AppSettings.minimalPriceDelivery - totalSum) Руб."
-        if totalSum > AppSettings.minimalPriceDelivery {
-            tableFooterViewForBasket.priceDeliveryLabel.isHidden = true
-            tableFooterViewForBasket.orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
-        } else {
-            tableFooterViewForBasket.priceDeliveryLabel.isHidden = false
-            tableFooterViewForBasket.orderButton.setTitle("Оформить заказ на \(totalSum + AppSettings.priceDelivery) Руб.", for: .normal)
-        }
-    }
+    
     
     
     
     let basketTableView = UITableView()
     var tableFooterViewForBasket = TableFooterViewForBasket()
-    
-    private let clearBasketButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(tapClearButton), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func tapClearButton() {
-        print("basket Clear")
-        AppSettings.settings.basket.removeAll()
-        UserDefaults.standard.removeObject(forKey: AppSettings.basketKey)
-        basketTableView.reloadData()
-        NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
-    }
 }
 
 private extension BasketViewController {
@@ -66,6 +40,7 @@ private extension BasketViewController {
         basketTableView.bounces = false
         basketTableView.backgroundColor = .systemGray6
         basketTableView.dataSource = self
+        basketTableView.delegate = self
         basketTableView.tableFooterView = tableFooterViewForBasket
         basketTableView.isUserInteractionEnabled = true
         tableFooterViewForBasket.commentTextField.delegate = self
@@ -79,12 +54,7 @@ private extension BasketViewController {
             make.edges.equalToSuperview()
         }
         
-        view.addSubview(clearBasketButton)
-        clearBasketButton.backgroundColor = .blue
-        clearBasketButton.snp.makeConstraints { make in
-            make.height.width.equalTo(60)
-            make.bottom.trailing.equalToSuperview().offset(-100)
-        }
+
     }
     
     @objc func hideKeyboard() {
@@ -98,29 +68,29 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
         AppSettings.settings.basket.keys.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIConstants.ConstantsForBasketViewCell.cellHeight  // ваша фиксированная высота ячейки
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BasketViewCell.self), for: indexPath) as! BasketViewCell
         let key = Array(AppSettings.settings.basket.keys)[indexPath.row]
-        if let products = AppSettings.settings.basket[key], !products.isEmpty {
-            let product = products.first!
+        if let product = AppSettings.settings.basket[key] {
             cell.configure(with: product)
-            cell.labelQuantityProduct.text = "\(products.count)"
-        }
-        cell.lessProductClosure = { [weak self, weak cell] in
-            guard let productId = cell?.productId else { return }
-            AppSettings.settings.removeItem(id: productId)
-            cell?.updateQuantityLabel(productId: productId)
-            self?.basketTableView.reloadData()
-            self?.updateTotalPrice()
+            cell.moreProductClosure = { [weak self] in
+                AppSettings.settings.addItem(id: key)
+                self?.basketTableView.reloadData()
+            }
+            cell.lessProductClosure = { [weak self] in
+                AppSettings.settings.removeItem(id: key)
+                self?.basketTableView.reloadData()
+            }
+            cell.removeProductClosure = { [weak self] in
+                AppSettings.settings.removeSingleItem(id: key)
+                self?.basketTableView.reloadData()
+            }
         }
         
-        cell.moreProductClosure = { [weak self, weak cell] in
-            guard let productId = cell?.productId else { return }
-            AppSettings.settings.addItem(id: productId)
-            cell?.updateQuantityLabel(productId: productId)
-            self?.basketTableView.reloadData()
-            self?.updateTotalPrice()
-        }
         return cell
     }
     

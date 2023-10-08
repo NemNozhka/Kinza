@@ -19,12 +19,12 @@ class MenuViewCell: UITableViewCell {
         spicyLabel.isHidden = !info.isSpicy
         
         if isProductInBasket(id: info.idProduct) {
-                buttonAddBasketProduct.setTitle("В корзине", for: .normal)
-                buttonAddBasketProduct.isEnabled = false
-            } else {
-                buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
-                buttonAddBasketProduct.isEnabled = true
-            }
+            buttonAddBasketProduct.setTitle("В корзине", for: .normal)
+            buttonAddBasketProduct.isEnabled = false
+        } else {
+            buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
+            buttonAddBasketProduct.isEnabled = true
+        }
     }
     
     func isProductInBasket(id: String) -> Bool {
@@ -36,28 +36,26 @@ class MenuViewCell: UITableViewCell {
         selectionStyle = .none //убрали выделение ячейки
         contentView.addSubview(imageProductView)
         imageProductView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+
             make.leading.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetImageProductFromLeading)
-            //make.height.equalTo(contentView.snp.width) //высота равна ширине
             make.size.equalTo(UIConstants.ConstantsForMenuViewCell.imageProductSize)
         }
         
-        let nameProductAndPriceProductStackView = UIStackView()
-        nameProductAndPriceProductStackView.axis = .vertical
-        nameProductAndPriceProductStackView.addArrangedSubview(labelNameProduct)
-        nameProductAndPriceProductStackView.addArrangedSubview(labelDiscriptionProduct)
-        nameProductAndPriceProductStackView.layer.cornerRadius = 4
-        nameProductAndPriceProductStackView.spacing = UIConstants.ConstantsForMenuViewCell.spacingBetweenNameAndDiscription
-        contentView.addSubview(nameProductAndPriceProductStackView)
-        nameProductAndPriceProductStackView.snp.makeConstraints { make in
-            make.centerY.equalTo(imageProductView)
+        let nameProductAndDiscriptionProductStackView = UIStackView()
+        nameProductAndDiscriptionProductStackView.axis = .vertical
+        nameProductAndDiscriptionProductStackView.addArrangedSubview(labelNameProduct)
+        nameProductAndDiscriptionProductStackView.addArrangedSubview(labelDiscriptionProduct)
+        nameProductAndDiscriptionProductStackView.spacing = UIConstants.ConstantsForMenuViewCell.spacingBetweenNameAndDiscription
+        contentView.addSubview(nameProductAndDiscriptionProductStackView)
+        nameProductAndDiscriptionProductStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
             make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
             make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
         }
         
         contentView.addSubview(likeChildrenLabel)
         likeChildrenLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProduct)
+            make.centerX.equalTo(imageProductView)
             make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetLikeChildrenFromImageProductTop)
             make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightLikeChildren)
             make.width.equalTo(UIConstants.ConstantsForMenuViewCell.widthLikeChildren)
@@ -65,7 +63,7 @@ class MenuViewCell: UITableViewCell {
         
         contentView.addSubview(spicyLabel)
         spicyLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProduct)
+            make.centerX.equalTo(imageProductView)
             make.top.equalTo(imageProductView).inset(UIConstants.ConstantsForMenuViewCell.insetSpicyLabelFromImageProductTop)
             make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightSpicyLabel)
             make.width.equalTo(UIConstants.ConstantsForMenuViewCell.widthSpicyLabel)
@@ -73,12 +71,14 @@ class MenuViewCell: UITableViewCell {
         
         contentView.addSubview(buttonAddBasketProduct)
         buttonAddBasketProduct.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromBottom)
+            make.bottom.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetButtonFromTrailing)
-            make.top.equalTo(nameProductAndPriceProductStackView.snp.bottom).offset(UIConstants.ConstantsForMenuViewCell.insetButtonFromStackView)
             make.width.equalTo(UIConstants.ConstantsForMenuViewCell.widthButton)
+            make.height.equalTo(UIConstants.ConstantsForMenuViewCell.heightButton)
         }
     }
+    
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -92,6 +92,7 @@ class MenuViewCell: UITableViewCell {
     //MARK: - изображение продукта
     private let imageProductView: UIImageView = {
         let imageProductView = UIImageView()
+        imageProductView.contentMode = .scaleAspectFit
         imageProductView.layer.cornerRadius = UIConstants.ConstantsForMenuViewCell.imageProductSize * 0.15
         imageProductView.clipsToBounds = true
         return imageProductView
@@ -100,7 +101,7 @@ class MenuViewCell: UITableViewCell {
     //MARK: - Надпись названия продукта
     private let labelNameProduct: UILabel = {
         let labelNameProduct = UILabel()
-        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .bold)
+        labelNameProduct.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelNameProductFontSize, weight: .bold)
         labelNameProduct.numberOfLines = 0
         return labelNameProduct
     }()
@@ -117,7 +118,7 @@ class MenuViewCell: UITableViewCell {
     //MARK: - Кнопка добавления продукта в корзину
     let buttonAddBasketProduct: UIButton = {
         let buttonAddBasketProduct = UIButton(type: .system)
-        buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelSize, weight: .medium)
+        buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelButtonAddBusketFontSize, weight: .medium)
         buttonAddBasketProduct.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         buttonAddBasketProduct.tintColor = .black
         buttonAddBasketProduct.layer.cornerRadius = 10
@@ -141,7 +142,7 @@ class MenuViewCell: UITableViewCell {
         likeLabel.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.likeChildrenLabelFontSize, weight: .medium)
         likeLabel.textColor = .white
         likeLabel.clipsToBounds = true
-        likeLabel.layer.cornerRadius = 10
+        likeLabel.layer.cornerRadius = 7
         likeLabel.textAlignment = .center
         return likeLabel
     }()
@@ -154,7 +155,7 @@ class MenuViewCell: UITableViewCell {
         spicyLabel.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.spicyLabelLabelFontSize, weight: .medium)
         spicyLabel.textColor = .white
         spicyLabel.clipsToBounds = true
-        spicyLabel.layer.cornerRadius = 10
+        spicyLabel.layer.cornerRadius = 7
         spicyLabel.textAlignment = .center
         return spicyLabel
     }()

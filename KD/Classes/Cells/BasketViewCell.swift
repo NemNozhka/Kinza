@@ -18,62 +18,73 @@ class BasketViewCell: UITableViewCell {
         labelNameProduct.text = info.nameProduct
         labelPrice.text = "\(String(info.priceProduct)) Руб."
         productId = info.idProduct
-        updatePriceLabel(productId: info.idProduct)
+        updateLabels(product: info)
     }
     
-    func updatePriceLabel(productId: String) {
-        guard let productArray = AppSettings.settings.basket[productId],
-              let pricePerItem = productArray.first?.priceProduct else {
-            return
-        }
-        let totalQuantity = productArray.count
-        let totalPrice = pricePerItem * totalQuantity
-        labelPrice.text = "\(totalPrice) Руб."
+    func updateLabels(product: ProductModel) {
+        let roundedWeight = round(product.weightProduct * 10) / 10
+            labelQuantityProduct.text = product.isWeightProduct ? "\(roundedWeight)" : "\(product.quantityProduct)"
+            let pricePerUnit = Double(product.priceProduct)  // Преобразование в Double, если это необходимо
+            let totalPrice = product.isWeightProduct ? pricePerUnit * (roundedWeight/0.1) : pricePerUnit * Double(product.quantityProduct)
+            let roundedTotalPrice = Int(totalPrice)  // Округление вниз до ближайшего целого числа
+            labelPrice.text = "\(roundedTotalPrice) Руб."
     }
-    
-    func updateQuantityLabel(productId: String) {
-        let quantity = AppSettings.settings.basket[productId]?.count ?? 0
-        labelQuantityProduct.text = "\(quantity)"
-        updatePriceLabel(productId: productId)  // вызов метода обновления цены
-    }
-    
-    
     
     func initialize() {
         contentView.backgroundColor = .systemGray6
         selectionStyle = .none //убрали выделение ячейки
         contentView.addSubview(imageProductView)
         imageProductView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromLeading)
             make.size.equalTo(UIConstants.ConstantsForBasketViewCell.imageProductSize)
-            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetImageProductFromBottom)
+        }
+        
+        contentView.addSubview(labelNameProduct)
+        labelNameProduct.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(5)
+            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
+        }
+        
+        contentView.addSubview(buttonRemoveItem)
+        buttonRemoveItem.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(40)
+            make.trailing.equalToSuperview().inset(20)
+            make.size.equalTo(23)
+        }
+        
+        moreQuantityProductButton.snp.makeConstraints { make in
+            make.size.equalTo(23)  // Укажите желаемый размер
+        }
+        lessQuantityProductButton.snp.makeConstraints { make in
+            make.size.equalTo(23)  // Укажите желаемый размер
         }
         
         let quantityActionStack = UIStackView()
         quantityActionStack.addArrangedSubview(lessQuantityProductButton)
-        quantityActionStack.addArrangedSubview(labelQuantityProduct)
-        quantityActionStack.addArrangedSubview(moreQuantityProductButton)
-        quantityActionStack.axis = .horizontal
-        quantityActionStack.spacing = 10
-        
-        let quantityAndPriceStack = UIStackView()
-        quantityAndPriceStack.addArrangedSubview(quantityActionStack)
-        quantityAndPriceStack.addArrangedSubview(labelPrice)
-        quantityAndPriceStack.axis = .horizontal
-        quantityAndPriceStack.spacing = 30
-        
-        let dictionaryStack = UIStackView()
-        dictionaryStack.addArrangedSubview(labelNameProduct)
-        dictionaryStack.addArrangedSubview(quantityAndPriceStack)
-        dictionaryStack.axis = .vertical
-        dictionaryStack.spacing = 30
-        contentView.addSubview(dictionaryStack)
-        dictionaryStack.snp.makeConstraints { make in
-            make.centerY.equalTo(imageProductView)
+                quantityActionStack.addArrangedSubview(labelQuantityProduct)
+                quantityActionStack.addArrangedSubview(moreQuantityProductButton)
+                quantityActionStack.axis = .horizontal
+                quantityActionStack.spacing = 5
+        quantityActionStack.alignment = .center  // Выравнивание элементов по центру по вертикали
+        quantityActionStack.distribution = .equalSpacing
+        quantityActionStack.layer.cornerRadius = 11
+        contentView.addSubview(quantityActionStack)
+        quantityActionStack.snp.makeConstraints { make in
             make.leading.equalTo(imageProductView.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(20)
+            make.width.equalTo(85)
+            
         }
+        
+        contentView.addSubview(labelPrice)
+        labelPrice.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(20)
+            make.leading.equalTo(quantityActionStack.snp.trailing).offset(20)
+            make.height.equalTo(25)
+            make.width.equalTo(90)
+        }
+
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -103,17 +114,26 @@ class BasketViewCell: UITableViewCell {
     
     private let labelPrice: UILabel = {
         let label = UILabel()
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 11
+        label.textAlignment = .center
+        label.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         return label
     }()
     
     let labelQuantityProduct: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     
     private let lessQuantityProductButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+            button.contentVerticalAlignment = .fill
+            button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = .black
         button.addTarget(self, action: #selector(tapLessQuantityProductButton), for: .touchUpInside)
         return button
     }()
@@ -121,16 +141,18 @@ class BasketViewCell: UITableViewCell {
     var lessProductClosure: (() -> Void)?
     
     @objc func tapLessQuantityProductButton(_ sender: UIButton) {
-        lessProductClosure?()
+        
+            lessProductClosure?()
         print("minus")
-        if let productId = productId {
-            updateQuantityLabel(productId: productId)
-        }
     }
-    
+        
     private let moreQuantityProductButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = .black
         button.addTarget(self, action: #selector(tapMoreQuantityProductButton), for: .touchUpInside)
         return button
     }()
@@ -140,10 +162,23 @@ class BasketViewCell: UITableViewCell {
     @objc func tapMoreQuantityProductButton(_ sender: UIButton) {
         moreProductClosure?()
         print("plus")
-        if let productId = productId {
-            updateQuantityLabel(productId: productId)
-        }
-        
+    }
+    
+    private let buttonRemoveItem: UIButton = {
+       let button = UIButton()
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(tapButtonRemoveItem), for: .touchUpInside)
+        return button
+    }()
+    
+    var removeProductClosure: (() -> Void)?
+    @objc func tapButtonRemoveItem(_ sender: UIButton) {
+        removeProductClosure?()
+        print("RemoveItem")
     }
     
 }

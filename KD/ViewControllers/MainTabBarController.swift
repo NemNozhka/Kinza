@@ -22,7 +22,16 @@ class MainTabBarController: UITabBarController {
     }
 
     func updateBadgeValue() {
-        let itemCount = AppSettings.settings.basket.values.reduce(0) { $0 + $1.count }
+        var itemCount = 0
+        for product in AppSettings.settings.basket.values {
+            if product.isWeightProduct {
+                // Весовой товар всегда считается за 1 штуку, независимо от его веса
+                itemCount += 1
+            } else {
+                // Невесовой товар считается по количеству
+                itemCount += product.quantityProduct
+            }
+        }
         self.tabBar.items?[1].badgeValue = "\(itemCount)"
     }
     

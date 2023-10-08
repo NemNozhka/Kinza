@@ -17,20 +17,7 @@ class TableFooterViewForBasket: UIView {
     let commentTextField = TextFieldController(placeholder: "Комментарий к заказу")
     let adressTextField = TextFieldController(placeholder: "Адресс доставки")
     
-    func updateSumLabel() {
-        let totalSum = AppSettings.getTotalPrice()
-        summLabel.text = "Сумма заказа: \(totalSum) Руб."
-        orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
-        priceDeliveryLabel.text = "Стоимость доставки 100 Руб. Для бесплатной доставки добавьте корзину товара на сумму \(AppSettings.minimalPriceDelivery - totalSum) Руб."
-        if totalSum > AppSettings.minimalPriceDelivery {
-            priceDeliveryLabel.isHidden = true
-            orderButton.setTitle("Оформить заказ на \(totalSum) Руб.", for: .normal)
-            
-        } else {
-            priceDeliveryLabel.isHidden = false
-            orderButton.setTitle("Оформить заказ на \(totalSum + AppSettings.priceDelivery) Руб.", for: .normal)
-        }
-    }
+    
     
     //MARK: - configure
     func configure() {
@@ -40,46 +27,53 @@ class TableFooterViewForBasket: UIView {
             make.leading.equalToSuperview().inset(20)
         }
         
-        addSubview(priceDeliveryLabel)
-        priceDeliveryLabel.snp.makeConstraints { make in
-            make.top.equalTo(summLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalToSuperview().inset(20)
-        }
-        
         addSubview(nameTextField)
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(priceDeliveryLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(summLabel.snp.bottom).offset(20)
+            make.height.equalTo(60)
+            make.width.equalTo(350)
+            make.centerX.equalToSuperview()
         }
         
         addSubview(numberPhoneTextField)
         numberPhoneTextField.translatesAutoresizingMaskIntoConstraints = false
         numberPhoneTextField.snp.makeConstraints { make in
             make.top.equalTo(nameTextField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+            make.width.equalTo(350)
+            make.centerX.equalToSuperview()
         }
         
         addSubview(commentTextField)
         commentTextField.translatesAutoresizingMaskIntoConstraints = false
         commentTextField.snp.makeConstraints { make in
             make.top.equalTo(numberPhoneTextField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+            make.width.equalTo(350)
+            make.centerX.equalToSuperview()
         }
         
         addSubview(deliveryLabelMain)
         deliveryLabelMain.snp.makeConstraints { make in
             make.top.equalTo(commentTextField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(350)
+            make.centerX.equalToSuperview()
         }
         
         addSubview(deliveryLabelSubMain)
         deliveryLabelSubMain.snp.makeConstraints { make in
             make.top.equalTo(deliveryLabelMain.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(350)
+            make.centerX.equalToSuperview()
         }
         
+        deliveryRadioButton.snp.makeConstraints { make in
+            make.size.equalTo(23)
+        }
+        selfDeliveryRadioButton.snp.makeConstraints { make in
+            make.size.equalTo(23)
+        }
         let deliveryStackView = UIStackView()
         deliveryStackView.addArrangedSubview(deliveryRadioButton)
         deliveryStackView.addArrangedSubview(deliveryLabel)
@@ -100,23 +94,59 @@ class TableFooterViewForBasket: UIView {
         deliveryMethodStackView.spacing = 10
         deliveryMethodStackView.snp.makeConstraints { make in
             make.top.equalTo(deliveryLabelSubMain.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(30)
+            make.leading.equalToSuperview().inset(30)
+            
         }
         
         addSubview(adressTextField)
         adressTextField.translatesAutoresizingMaskIntoConstraints = false
         adressTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+            make.width.equalTo(350)
+            make.centerX.equalToSuperview()
             make.top.equalTo(deliveryMethodStackView.snp.bottom).offset(20)
+        }
+        
+        addSubview(priceDeliveryLabel)
+//        priceDeliveryLabel.textAlignment = .center
+        priceDeliveryLabel.snp.makeConstraints { make in
+            make.top.equalTo(adressTextField.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+//            make.leading.equalToSuperview().inset(20)
+//            make.trailing.equalToSuperview().inset(20)
         }
         
         addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
-            make.top.equalTo(adressTextField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(priceDeliveryLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
             make.height.equalTo(60)
+            make.width.equalTo(350)
+        }
+        
+        updateSumLabel()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(basketChanged), name: Notification.Name("BasketChanged"), object: nil)
+    }
+    
+    @objc func basketChanged() {
+        updateSumLabel()
+    }
+    
+    func updateSumLabel() {
+        let totalPrice = AppSettings.settings.calculateTotalPrice()
+        summLabel.text = "Сумма заказа: \(totalPrice) Руб."
+        orderButton.setTitle("Оформить заказ на \(totalPrice) Руб.", for: .normal)
+        if AppSettings.settings.isDeliveryFree() {
+            priceDeliveryLabel.text = "Доставка бесплатно!"
+            orderButton.setTitle("Оформить заказ на \(totalPrice) Руб.", for: .normal)
+        } else {
+            priceDeliveryLabel.text = "Стоимость доставки 100 рублей."
+            orderButton.setTitle("Оформить заказ на \(totalPrice + AppSettings.priceDelivery) Руб.", for: .normal)
         }
     }
+    
+    
     
     //MARK: - initialize
     convenience init() {
@@ -152,7 +182,7 @@ class TableFooterViewForBasket: UIView {
     private let deliveryLabelSubMain: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Вы можете забрать заказ по адрессу: г. Балаково, ул. Шоссе Энергетиков, 1/2. Доставка осуществляется в пределах города."
+        label.text = "Вы можете забрать заказ по адрессу: г. Балаково, ул. Шоссе Энергетиков, 1/2. Доставка осуществляется в пределах города Балаково."
         label.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelDiscriptionProductSize, weight: .light)
         return label
     }()
@@ -167,6 +197,10 @@ class TableFooterViewForBasket: UIView {
     
     private let deliveryRadioButton: UIButton = {
         let button = UIButton()
+        button.contentHorizontalAlignment = .fill
+            button.contentVerticalAlignment = .fill
+            button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = .black
         button.setImage(UIImage(systemName: "circle.inset.filled"), for: .normal)
         button.addTarget(self, action: #selector(tapDeliveryRadioButton), for: .touchUpInside)
         return button
@@ -189,6 +223,10 @@ class TableFooterViewForBasket: UIView {
     
     private let selfDeliveryRadioButton: UIButton = {
         let button = UIButton()
+        button.contentHorizontalAlignment = .fill
+            button.contentVerticalAlignment = .fill
+            button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = .black
         button.setImage(UIImage(systemName: "circle"), for: .normal)
         button.addTarget(self, action: #selector(tapSelfDeliveryRadioButton), for: .touchUpInside)
         return button
@@ -213,31 +251,42 @@ class TableFooterViewForBasket: UIView {
     }()
     
     @objc func orderButtonTapped() {
-        sendOrderDetailsToTelegram()
+                sendOrderDetailsToTelegram()
     }
     
     func sendOrderDetailsToTelegram() {
-        
         let orderDetails = gatherOrderDetails()
         TelegramBot.botTG.sendMessage(orderDetails) { result in
             switch result {
             case .success(let message):
-                print(message)
+                print(message)  // Вывод успешного сообщения
             case .failure(let error):
-                print("Failed to send message: \(error)")
+                print("Failed to send message: \(error)")  // Обработка ошибки
             }
         }
     }
     
     func gatherOrderDetails() -> String {
-        let totalSum = AppSettings.getTotalPrice()
+        let totalSum = AppSettings.settings.calculateTotalPrice()
         
         var productsDetails = ""
-        for (key, products) in AppSettings.settings.basket {
-            guard let product = products.first else { continue }
-            let quantity = products.count
-            let productDetail = "\(product.nameProduct) - \(quantity) шт.\n"
-            productsDetails.append(contentsOf: productDetail)
+        for (_, product) in AppSettings.settings.basket {
+            if product.isWeightProduct {
+                // Форматируем вес до двух знаков после запятой
+                let formattedWeight = String(format: "%.1f", product.weightProduct)
+                let productDetail = """
+                Наименование: \(product.nameProduct)
+                Вес: \(formattedWeight) кг
+                """
+                productsDetails.append(contentsOf: productDetail)
+            } else {
+                let productDetail = """
+                Наименование: \(product.nameProduct)
+                Количество: \(product.quantityProduct) шт.
+                """
+                productsDetails.append(contentsOf: productDetail)
+            }
+            productsDetails.append("\n")  // Добавляем новую строку между товарами
         }
         
         let userName = nameTextField.text ?? "Не указано"

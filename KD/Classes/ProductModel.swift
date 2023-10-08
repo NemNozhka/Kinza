@@ -11,14 +11,15 @@ struct ProductModel: Codable {
     let idProduct: String
     let imageProduct: String
     let priceProduct: Int
-    let weightProduct: Double
+    var weightProduct: Double
+    var quantityProduct: Int
     let nameProduct: String
     let descriptionProduct: String
     let itLikeChildren: Bool
     let isSpicy: Bool
     let isWeightProduct: Bool
     
-    init(idProduct: String, imageProduct: String, priceProduct: Int, weightProduct: Double, nameProduct: String, descriptionProduct: String, itLikeChildren: Bool, isSpicy: Bool, isWeightProduct: Bool) {
+    init(idProduct: String, imageProduct: String, priceProduct: Int, weightProduct: Double, nameProduct: String, descriptionProduct: String, itLikeChildren: Bool, isSpicy: Bool, isWeightProduct: Bool, quantityProduct: Int) {
         self.idProduct = idProduct
         self.imageProduct = imageProduct
         self.priceProduct = priceProduct
@@ -28,8 +29,12 @@ struct ProductModel: Codable {
         self.itLikeChildren = itLikeChildren
         self.isSpicy = isSpicy
         self.isWeightProduct = isWeightProduct
+        self.quantityProduct = quantityProduct
     }
 }
+
+
+
 
 
 
