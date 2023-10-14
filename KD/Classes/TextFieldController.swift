@@ -57,7 +57,7 @@ class TextFieldController: UITextField {
         }
         
         if isPhoneNumberField {
-                    keyboardType = .phonePad
+                    keyboardType = .numberPad
                     addTarget(self, action: #selector(phoneNumberFormatting), for: .editingChanged)
                 }
         

@@ -12,7 +12,7 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         title = "Корзина"
         initialize()
         basketTableView.reloadData()

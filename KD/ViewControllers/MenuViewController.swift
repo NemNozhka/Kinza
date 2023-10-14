@@ -31,6 +31,7 @@ class MenuViewController: UIViewController {
         menuTableView.bounces = false
         menuTableView.backgroundColor = .systemGray6
         menuTableView.dataSource = self
+        menuTableView.tableHeaderView
         menuTableView.separatorColor = .clear // cellID
         menuTableView.register(MenuViewCell.self, forCellReuseIdentifier: "cellMenu")
         menuTableView.delegate = self

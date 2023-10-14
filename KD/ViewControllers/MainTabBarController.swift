@@ -19,8 +19,18 @@ class MainTabBarController: UITabBarController {
     
     @objc func basketChanged() {
         updateBadgeValue()
+        
+        let badgeValue = self.tabBar.items?[1].badgeValue  // сохраняем текущее значение badgeValue
+            
+            let basketVC = isBasketEmpty() ? EmptyBasketViewController() : BasketViewController()
+            let basketNavVC = UINavigationController(rootViewController: basketVC)
+            let basketTabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket"), selectedImage: UIImage(systemName: "basket.fill"))
+            basketNavVC.tabBarItem = basketTabBarItem
+            
+            viewControllers?[1] = basketNavVC
+            viewControllers?[1].tabBarItem.badgeValue = badgeValue
     }
-
+    
     func updateBadgeValue() {
         var itemCount = 0
         for product in AppSettings.settings.basket.values {
@@ -35,13 +45,26 @@ class MainTabBarController: UITabBarController {
         self.tabBar.items?[1].badgeValue = "\(itemCount)"
     }
     
+    func isBasketEmpty() -> Bool {
+        return AppSettings.settings.basket.isEmpty
+    }
+    
+    func switchToTab(index: Int) {
+            guard index >= 0 && index < self.tabBar.items?.count ?? 0 else {
+                print("Invalid tab index")
+                return
+            }
+            self.selectedIndex = index
+        }
+    
     func setupTabBarControllers() {
         let menuVC = MenuViewController()
         let menuNavVC = UINavigationController(rootViewController: menuVC)
         let menuTabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard"), selectedImage: UIImage(systemName: "menucard.fill"))
         menuNavVC.tabBarItem = menuTabBarItem
         
-        let basketVC = BasketViewController()
+        //        let basketVC = BasketViewController()
+        let basketVC = isBasketEmpty() ? EmptyBasketViewController() : BasketViewController()
         let basketNavVC = UINavigationController(rootViewController: basketVC)
         let basketTabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket"), selectedImage: UIImage(systemName: "basket.fill"))
         basketNavVC.tabBarItem = basketTabBarItem
@@ -50,10 +73,19 @@ class MainTabBarController: UITabBarController {
         let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
         let favoriteTabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
         favoriteNavVC.tabBarItem = favoriteTabBarItem
-
+        
         viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
     }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let index = self.tabBar.items?.firstIndex(of: item),
+              let navController = viewControllers?[index] as? UINavigationController else { return }
+        
+        navController.popToRootViewController(animated: false)
+    }
 }
+
+
 
 
 
