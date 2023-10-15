@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import ScrollableSegmentedControl
 
 class TableHeaderViewForMenu: UIView {
     
@@ -15,40 +16,34 @@ class TableHeaderViewForMenu: UIView {
     
     convenience init() {
         self.init(frame: .zero)
-        frame.size.height = 50
+        frame.size.height = 200
         configure()
     }
     
     func configure() {
-        addSubview(scrollView)
-            scrollView.addSubview(segmentedControlMenu)
+        addSubview(segmentedControlMenu)
             
-            scrollView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-            
-            segmentedControlMenu.snp.makeConstraints { make in
-                make.top.bottom.equalToSuperview()
-                make.leading.trailing.equalToSuperview()
-                make.height.equalTo(30)  // Устанавливаем высоту UISegmentedControl
-                make.width.greaterThanOrEqualTo(scrollView).offset(20)
+        segmentedControlMenu.snp.makeConstraints { make in
+                make.top.bottom.leading.trailing.equalToSuperview()
+                
             }
     }
     
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.isDirectionalLockEnabled = true
-        return scrollView
-    }()
-    
-    private let segmentedControlMenu: UISegmentedControl = {
-       let segment = UISegmentedControl(items: ["Пицца", "Блюда на мангале", "Хачапури", "К блюду"])
+    private let segmentedControlMenu: ScrollableSegmentedControl = {
+        let segment = ScrollableSegmentedControl()
+        segment.segmentStyle = .textOnly // Эта строка указывает, что сегменты будут содержать только текст
+        segment.insertSegment(withTitle: "Пицца", image: nil, at: 0)
+        segment.insertSegment(withTitle: "Блюда на мангале", image: nil, at: 1)
+        segment.insertSegment(withTitle: "Хачапури", image: nil, at: 2)
+        segment.insertSegment(withTitle: "К блюду", image: nil, at: 3)
+        segment.backgroundColor = .red
+        segment.selectedSegmentContentColor = UIColor.yellow
+        segment.fixedSegmentWidth = false
         segment.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         return segment
     }()
     
-    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    @objc func segmentedControlValueChanged(_ sender: ScrollableSegmentedControl) {
             menuViewController?.updateTableForSegment(index: sender.selectedSegmentIndex)
         }
 }

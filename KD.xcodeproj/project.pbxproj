@@ -47,7 +47,6 @@
 		EC75AA472A7D20EC00B8641D /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		EC781FDE2A9B66B1007F8418 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		EC91646D2AD5C8F300C3EDC6 /* EmptyBasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBasketViewController.swift; sourceTree = "<group>"; };
-		EC91E63D2A7C316C004231CC /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC91E6402A7C316C004231CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC91E6422A7C316C004231CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EC91E6442A7C316C004231CC /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		EC91E65B2A7C3251004231CC /* BasketViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewCell.swift; sourceTree = "<group>"; };
 		EC91E65D2A7C325C004231CC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EC91E65F2A7C32B8004231CC /* MenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
+		EC96A12D2ADC6BA7003DBFB5 /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = KD.app; path = "/Users/sergejnozka/Kinza/build/Debug-iphoneos/KD.app"; sourceTree = "<absolute>"; };
 		ECA96BF22AA8C9CC00B6917A /* TextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldController.swift; sourceTree = "<group>"; };
 		ECC76A062AA749EF006A90BF /* TableFooterViewForBasket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFooterViewForBasket.swift; sourceTree = "<group>"; };
 		ECE543A82ADB235A00420FED /* TableHeaderViewForMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderViewForMenu.swift; sourceTree = "<group>"; };
@@ -130,16 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				EC91E63F2A7C316C004231CC /* KD */,
-				EC91E63E2A7C316C004231CC /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		EC91E63E2A7C316C004231CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EC91E63D2A7C316C004231CC /* KD.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		EC91E63F2A7C316C004231CC /* KD */ = {
@@ -181,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC91E6512A7C316E004231CC /* Build configuration list for PBXNativeTarget "KD" */;
 			buildPhases = (
+				8AA70EAFB317264700507CA8 /* [CP] Check Pods Manifest.lock */,
 				EC91E6392A7C316C004231CC /* Sources */,
 				EC91E63A2A7C316C004231CC /* Frameworks */,
 				EC91E63B2A7C316C004231CC /* Resources */,
+				BFA16DE5B89A4119D066A163 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,7 +191,7 @@
 				EC33263B2ACD984600D7DE62 /* Alamofire */,
 			);
 			productName = KD;
-			productReference = EC91E63D2A7C316C004231CC /* KD.app */;
+			productReference = EC96A12D2ADC6BA7003DBFB5 /* KD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -230,7 +223,7 @@
 				ECB7B9192AB71AB5004512EE /* XCRemoteSwiftPackageReference "swift-collections" */,
 				EC33263A2ACD984600D7DE62 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
-			productRefGroup = EC91E63E2A7C316C004231CC /* Products */;
+			productRefGroup = EC91E6342A7C316C004231CC;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -249,6 +242,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8AA70EAFB317264700507CA8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KD-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFA16DE5B89A4119D066A163 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KD/Pods-KD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KD/Pods-KD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KD/Pods-KD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC91E6392A7C316C004231CC /* Sources */ = {

@@ -15,7 +15,6 @@ class MenuViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableHeaderViewForMenu.menuViewController = self
         setTableView()
         title = "Меню"
         NotificationCenter.default.addObserver(self, selector: #selector(basketChanged), name: Notification.Name("BasketChanged"), object: nil)
