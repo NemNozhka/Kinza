@@ -32,7 +32,7 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
     
     
     let basketTableView = UITableView()
-    var tableFooterViewForBasket = TableFooterViewForBasket()
+    let tableFooterViewForBasket = TableFooterViewForBasket()
 }
 
 private extension BasketViewController {
