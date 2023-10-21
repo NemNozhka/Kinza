@@ -118,7 +118,7 @@ class MenuViewCell: UITableViewCell {
     //MARK: - Кнопка добавления продукта в корзину
     let buttonAddBasketProduct: UIButton = {
         let buttonAddBasketProduct = UIButton(type: .system)
-        buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelButtonAddBusketFontSize, weight: .medium)
+        buttonAddBasketProduct.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelButtonAddBasketFontSize, weight: .medium)
         buttonAddBasketProduct.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         buttonAddBasketProduct.tintColor = .black
         buttonAddBasketProduct.layer.cornerRadius = 10

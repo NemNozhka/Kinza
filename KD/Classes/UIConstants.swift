@@ -46,7 +46,7 @@ class UIConstants {
         static let spacingBetweenNameAndDiscription: CGFloat = 5
         static let labelDiscriptionProductSize: CGFloat = 12
         
-        static let labelButtonAddBusketFontSize: CGFloat = 16
+        static let labelButtonAddBasketFontSize: CGFloat = 16
         static let insetButtonFromBottom: CGFloat = 10
         static let insetButtonFromTrailing: CGFloat = 40
         static let insetButtonTrailing: CGFloat = 90
@@ -98,13 +98,8 @@ class UIConstants {
         static let insetImageProductFromLeading: CGFloat = 15
         static let insetImageProductFromBottom: CGFloat = 15
         
-        static let likeChildrenLabelFontSize: CGFloat = 11
-        static let insetLikeChildrenFromImageProduct: CGFloat = 25
-        static let insetLikeChildrenFromImageProductTop: CGFloat = 12
-        static let heightLikeChildren: CGFloat = 25
-        static let widthLikeChildren: CGFloat = 110
-        
         static let labelSize: CGFloat = 20
+        static let insetLabelNameProductFromTop: CGFloat = 5
         static let labelNameProductFontSize: CGFloat = 14
         
         static let spacingBetweenNameAndDiscription: CGFloat = 10
@@ -121,10 +116,50 @@ class UIConstants {
         static let insetNameAndDiscriptionFromImage: CGFloat = 12
         static let insetNameAndDiscriptionFromTrailing: CGFloat = 12
         
-        //        static let insetSpicyLabelFromImageProduct: CGFloat = 25
-        //        static let insetSpicyLabelFromImageProductTop: CGFloat = 12
-        //        static let spicyLabelLabelFontSize: CGFloat = 11
-        //        static let heightSpicyLabel: CGFloat = 25
-        //        static let widthSpicyLabel: CGFloat = 70
+        static let insetButtonRemoveItemFromTop: CGFloat = 40
+        static let insetButtonRemoveItemFromTrailing: CGFloat = 20
+        static let sizeButtonRemoveItem: CGFloat = 23
+        
+        static let sizeMoreQuantityProductButton: CGFloat = 23
+        
+        static let sizeLessQuantityProductButton: CGFloat = 23
+        
+        static let spacingQuantityActionStack: CGFloat = 5
+        static let offsetQuantityActionStackFromLeadingImageProductView: CGFloat = 20
+        static let insetQuantityActionStackFromBottom: CGFloat = 20
+        static let widthQuantityActionStack: CGFloat = 85
+
+        static let insetLabelPriceFromBottom: CGFloat = 20
+        static let offsetLabelPriceFromLeadingQuantityActionStack: CGFloat = 20
+        static let widthLabelPrice: CGFloat = 90
+        static let heightLabelPrice: CGFloat = 25
+
+    }
+    
+    enum ConstantsForTableFooterViewForBasket {
+        
+        static let widthTextField: CGFloat = 350
+        static let heightTextField: CGFloat = 60
+        static let offsetTextFieldFromTop: CGFloat = 20
+        
+        static let insetSummLabelFromLeading: CGFloat = 20
+        
+        static let insetDeliveryLabelFromTextField: CGFloat = 20
+        static let insetDeliveryLabelFromDeliveryLabel: CGFloat = 10
+        static let widthDeliveryLabel: CGFloat = 350
+
+        static let sizeRadioButton: CGFloat = 23
+        
+        static let spacingDeliveryStackView: CGFloat = 20
+        static let spacingDeliveryMethodStackView: CGFloat = 10
+        static let offsetDeliveryMethodStackViewFromTop: CGFloat = 20
+        static let insetDeliveryMethodStackViewFromLeading: CGFloat = 30
+        
+        static let offsetPriceDeliveryLabelFromTop: CGFloat = 10
+        
+        static let offsetOrderButtonFromTop: CGFloat = 20
+        static let heightOrderButton: CGFloat = 60
+        static let widthOrderButton: CGFloat = 350
+
     }
 }

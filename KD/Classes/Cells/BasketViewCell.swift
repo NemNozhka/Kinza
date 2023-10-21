@@ -41,23 +41,23 @@ class BasketViewCell: UITableViewCell {
         
         contentView.addSubview(labelNameProduct)
         labelNameProduct.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(5)
+            make.top.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetLabelNameProductFromTop)
             make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromImage)
             make.trailing.equalToSuperview().inset(UIConstants.ConstantsForMenuViewCell.insetNameAndDiscriptionFromTrailing)
         }
         
         contentView.addSubview(buttonRemoveItem)
         buttonRemoveItem.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(40)
-            make.trailing.equalToSuperview().inset(20)
-            make.size.equalTo(23)
+            make.top.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetButtonRemoveItemFromTop)
+            make.trailing.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetButtonRemoveItemFromTrailing)
+            make.size.equalTo(UIConstants.ConstantsForBasketViewCell.sizeButtonRemoveItem)
         }
         
         moreQuantityProductButton.snp.makeConstraints { make in
-            make.size.equalTo(23)  // Укажите желаемый размер
+            make.size.equalTo(UIConstants.ConstantsForBasketViewCell.sizeMoreQuantityProductButton)
         }
         lessQuantityProductButton.snp.makeConstraints { make in
-            make.size.equalTo(23)  // Укажите желаемый размер
+            make.size.equalTo(UIConstants.ConstantsForBasketViewCell.sizeLessQuantityProductButton)
         }
         
         let quantityActionStack = UIStackView()
@@ -65,24 +65,23 @@ class BasketViewCell: UITableViewCell {
                 quantityActionStack.addArrangedSubview(labelQuantityProduct)
                 quantityActionStack.addArrangedSubview(moreQuantityProductButton)
                 quantityActionStack.axis = .horizontal
-                quantityActionStack.spacing = 5
+        quantityActionStack.spacing = UIConstants.ConstantsForBasketViewCell.spacingQuantityActionStack
         quantityActionStack.alignment = .center  // Выравнивание элементов по центру по вертикали
         quantityActionStack.distribution = .equalSpacing
-        quantityActionStack.layer.cornerRadius = 11
         contentView.addSubview(quantityActionStack)
         quantityActionStack.snp.makeConstraints { make in
-            make.leading.equalTo(imageProductView.snp.trailing).offset(20)
-            make.bottom.equalToSuperview().inset(20)
-            make.width.equalTo(85)
+            make.leading.equalTo(imageProductView.snp.trailing).offset(UIConstants.ConstantsForBasketViewCell.offsetQuantityActionStackFromLeadingImageProductView)
+            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetQuantityActionStackFromBottom)
+            make.width.equalTo(UIConstants.ConstantsForBasketViewCell.widthQuantityActionStack)
             
         }
         
         contentView.addSubview(labelPrice)
         labelPrice.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(20)
-            make.leading.equalTo(quantityActionStack.snp.trailing).offset(20)
-            make.height.equalTo(25)
-            make.width.equalTo(90)
+            make.bottom.equalToSuperview().inset(UIConstants.ConstantsForBasketViewCell.insetLabelPriceFromBottom)
+            make.leading.equalTo(quantityActionStack.snp.trailing).offset(UIConstants.ConstantsForBasketViewCell.offsetLabelPriceFromLeadingQuantityActionStack)
+            make.height.equalTo(UIConstants.ConstantsForBasketViewCell.heightLabelPrice)
+            make.width.equalTo(UIConstants.ConstantsForBasketViewCell.widthLabelPrice)
         }
 
     }

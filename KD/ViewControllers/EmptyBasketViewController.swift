@@ -60,7 +60,7 @@ class EmptyBasketViewController: UIViewController {
     
     private let buttonEmpty: UIButton = {
         let button = UIButton(type: .system)
-        button.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelButtonAddBusketFontSize, weight: .medium)
+        button.titleLabel?.font = .systemFont(ofSize: UIConstants.ConstantsForMenuViewCell.labelButtonAddBasketFontSize, weight: .medium)
         button.backgroundColor = UIConstants.Colors.colorBackGroundColorButton
         button.setTitle("Перейти в меню", for: .normal)
         button.tintColor = .black
@@ -71,10 +71,10 @@ class EmptyBasketViewController: UIViewController {
     
     @objc func tapButtonEmpty(_ sender: UIButton) {
         let menuViewController = MenuViewController()
-            navigationController?.pushViewController(menuViewController, animated: true)
+            navigationController?.pushViewController(menuViewController, animated: false)
             
             if let mainTabBarController = self.tabBarController as? MainTabBarController {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
                     mainTabBarController.switchToTab(index: 0)  // 0 for Menu tab
                 }
             }

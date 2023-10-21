@@ -17,7 +17,7 @@ class LaunchScreenViewController: UIViewController {
     }
     
     func initialize() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         view.addSubview(image)
         image.snp.makeConstraints { make in
             make.centerX.equalToSuperview()

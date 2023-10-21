@@ -57,7 +57,7 @@ class TextFieldController: UITextField {
         }
         
         if isPhoneNumberField {
-                    keyboardType = .numberPad
+                    keyboardType = .phonePad
                     addTarget(self, action: #selector(phoneNumberFormatting), for: .editingChanged)
                 }
         
@@ -68,46 +68,57 @@ class TextFieldController: UITextField {
     
     
         
-    @objc private func phoneNumberFormatting() {
-        guard var text = self.text else { return }
+    private var previousText = ""
         
-        // Убедитесь, что ввод начинается с 7 или 8, затем замените его на +7
-        if text.count > 0, let firstCharacter = text.first, firstCharacter == "8" || firstCharacter == "7" {
-            text.removeFirst()
-            text = "+7" + text  // Исправлено здесь: добавлено сложение строк
-        }
+        // ...
         
-        // Убираем все символы, кроме цифр
-        let digits = text.filter { $0.isNumber }
-        
-        // Форматируем номер телефона в соответствии с шаблоном +7(XXX)XXX-XX-XX
-        var formattedNumber = "+7"
-        if digits.count > 1 {
-            formattedNumber += "("
-        }
-        for (index, digit) in digits.dropFirst().enumerated() {
-            switch index {
-            case 0...1:
-                formattedNumber.append(digit)
-            case 2:
-                formattedNumber.append("\(digit))")
-            case 3...5:
-                formattedNumber.append(digit)
-            case 6:
-                formattedNumber.append("-\(digit)")
-            case 7...7:
-                formattedNumber.append(digit)
-            case 8:
-                formattedNumber.append("-\(digit)")
-            case 9:
-                formattedNumber.append(digit)
-            default:
-                break
+        @objc private func phoneNumberFormatting() {
+            guard var text = self.text else { return }
+            
+            // Проверка на удаление символа
+            if text.count < previousText.count {
+                previousText = text // Обновляем предыдущий текст
+                return // Прекращаем выполнение, если символ был удален
             }
+            
+            // Убедитесь, что ввод начинается с 7 или 8, затем замените его на +7
+            if text.count > 0, let firstCharacter = text.first, firstCharacter == "8" || firstCharacter == "7" {
+                text.removeFirst()
+                text = "+7" + text
+            }
+            
+            // Убираем все символы, кроме цифр
+            let digits = text.filter { $0.isNumber }
+            
+            // Форматируем номер телефона в соответствии с шаблоном +7(XXX)XXX-XX-XX
+            var formattedNumber = "+7"
+            if digits.count > 1 {
+                formattedNumber += "("
+            }
+            for (index, digit) in digits.dropFirst().enumerated() {
+                switch index {
+                case 0...1:
+                    formattedNumber.append(digit)
+                case 2:
+                    formattedNumber.append("\(digit))")
+                case 3...5:
+                    formattedNumber.append(digit)
+                case 6:
+                    formattedNumber.append("-\(digit)")
+                case 7...7:
+                    formattedNumber.append(digit)
+                case 8:
+                    formattedNumber.append("-\(digit)")
+                case 9:
+                    formattedNumber.append(digit)
+                default:
+                    break
+                }
+            }
+            
+            self.text = formattedNumber
+            previousText = text // Обновляем предыдущий текст в конце метода
         }
-        
-        self.text = formattedNumber
-    }
 
     
     

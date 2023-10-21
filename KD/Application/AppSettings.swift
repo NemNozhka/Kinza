@@ -32,6 +32,11 @@ class AppSettings {
         }
     }
     
+    func removeAll() {
+            basket.removeAll()
+        NotificationCenter.default.post(name: Notification.Name("BasketChanged"), object: nil)
+        }
+    
     func removeSingleItem(id: String) {
         if var existingProduct = basket[id] {
             print("Продукт с ID \(id) найден в корзине.")

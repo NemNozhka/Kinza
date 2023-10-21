@@ -19,11 +19,15 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
         AppSettings.settings.cnahgeBasketClosure = { [weak self] in
             self?.basketTableView.reloadData()
         }
+       
     }
+    
+    
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        tableFooterViewForBasket.updateSumLabel()
         basketTableView.reloadData()
     }
     
@@ -32,7 +36,7 @@ class BasketViewController: UIViewController, UITextFieldDelegate {
     
     
     let basketTableView = UITableView()
-    var tableFooterViewForBasket = TableFooterViewForBasket()
+    let tableFooterViewForBasket = TableFooterViewForBasket()
 }
 
 private extension BasketViewController {
@@ -54,6 +58,15 @@ private extension BasketViewController {
             make.edges.equalToSuperview()
         }
         
+        tableFooterViewForBasket.removeAllProductBasket = { [weak self] in
+            AppSettings.settings.removeAll()
+            self?.basketTableView.reloadData()
+        }
+        
+        tableFooterViewForBasket.onShowThankYouView = { [weak self] in
+            let thankYouViewController = ThankYouViewController()
+            self?.present(thankYouViewController, animated: true)
+        }
 
     }
     
@@ -89,6 +102,7 @@ extension BasketViewController: UITableViewDataSource, UITableViewDelegate {
                 AppSettings.settings.removeSingleItem(id: key)
                 self?.basketTableView.reloadData()
             }
+            
         }
         
         return cell

@@ -14,7 +14,7 @@ class SingleProductView: UIViewController {
         imageProduct.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         labelDiscription.text = info.descriptionProduct
-        labelWeight.text = "Вес: \(info.weightProduct) гр."
+        labelWeight.text = "Вес: \(info.weightProduct) кг."
         
         if isProductInBasket(id: info.idProduct) {
             addBasketButton.setTitle("В корзине", for: .normal)

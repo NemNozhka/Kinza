@@ -4,7 +4,7 @@
 //
 //  Created by Сергей Ножка on 03.08.2023.
 //
-
+ 
 import SnapKit
 import UIKit
 
@@ -16,6 +16,8 @@ class MainTabBarController: UITabBarController {
         setupTabBarControllers()
         updateBadgeValue()
     }
+    
+
     
     @objc func basketChanged() {
         updateBadgeValue()
@@ -29,7 +31,11 @@ class MainTabBarController: UITabBarController {
             
             viewControllers?[1] = basketNavVC
             viewControllers?[1].tabBarItem.badgeValue = badgeValue
+        
+//        self.tabBar.barTintColor = .systemGray
+//        self.tabBar.isTranslucent = false
     }
+    
     
     func updateBadgeValue() {
         var itemCount = 0
@@ -63,18 +69,17 @@ class MainTabBarController: UITabBarController {
         let menuTabBarItem = UITabBarItem(title: "Меню", image: UIImage(systemName: "menucard"), selectedImage: UIImage(systemName: "menucard.fill"))
         menuNavVC.tabBarItem = menuTabBarItem
         
-        //        let basketVC = BasketViewController()
         let basketVC = isBasketEmpty() ? EmptyBasketViewController() : BasketViewController()
         let basketNavVC = UINavigationController(rootViewController: basketVC)
         let basketTabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket"), selectedImage: UIImage(systemName: "basket.fill"))
         basketNavVC.tabBarItem = basketTabBarItem
         
-        let favoriteVC = FavoriteViewController()
-        let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
-        let favoriteTabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
-        favoriteNavVC.tabBarItem = favoriteTabBarItem
+//        let favoriteVC = FavoriteViewController()
+//        let favoriteNavVC = UINavigationController(rootViewController: favoriteVC)
+//        let favoriteTabBarItem = UITabBarItem(title: "Любимое", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
+//        favoriteNavVC.tabBarItem = favoriteTabBarItem
         
-        viewControllers = [menuNavVC, basketNavVC, favoriteNavVC]
+        viewControllers = [menuNavVC, basketNavVC]  //[menuNavVC, basketNavVC, favoriteNavVC]
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

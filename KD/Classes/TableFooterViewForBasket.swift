@@ -21,113 +21,142 @@ class TableFooterViewForBasket: UIView {
     
     //MARK: - configure
     func configure() {
+        
+        backgroundColor = .systemGray6
+        
         addSubview(summLabel)
         summLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(UIConstants.ConstantsForTableFooterViewForBasket.insetSummLabelFromLeading)
         }
         
         addSubview(nameTextField)
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(summLabel.snp.bottom).offset(20)
-            make.height.equalTo(60)
-            make.width.equalTo(350)
+            make.top.equalTo(summLabel.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetTextFieldFromTop)
+            make.height.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.heightTextField)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthTextField)
             make.centerX.equalToSuperview()
         }
         
         addSubview(numberPhoneTextField)
         numberPhoneTextField.translatesAutoresizingMaskIntoConstraints = false
         numberPhoneTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(20)
-            make.height.equalTo(60)
-            make.width.equalTo(350)
+            make.top.equalTo(nameTextField.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetTextFieldFromTop)
+            make.height.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.heightTextField)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthTextField)
             make.centerX.equalToSuperview()
         }
         
         addSubview(commentTextField)
         commentTextField.translatesAutoresizingMaskIntoConstraints = false
         commentTextField.snp.makeConstraints { make in
-            make.top.equalTo(numberPhoneTextField.snp.bottom).offset(20)
-            make.height.equalTo(60)
-            make.width.equalTo(350)
+            make.top.equalTo(numberPhoneTextField.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetTextFieldFromTop)
+            make.height.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.heightTextField)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthTextField)
             make.centerX.equalToSuperview()
         }
         
         addSubview(deliveryLabelMain)
         deliveryLabelMain.snp.makeConstraints { make in
-            make.top.equalTo(commentTextField.snp.bottom).offset(20)
-            make.width.equalTo(350)
+            make.top.equalTo(commentTextField.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.insetDeliveryLabelFromTextField)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthDeliveryLabel)
             make.centerX.equalToSuperview()
         }
         
         addSubview(deliveryLabelSubMain)
         deliveryLabelSubMain.snp.makeConstraints { make in
-            make.top.equalTo(deliveryLabelMain.snp.bottom).offset(10)
-            make.width.equalTo(350)
+            make.top.equalTo(deliveryLabelMain.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.insetDeliveryLabelFromDeliveryLabel)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthDeliveryLabel)
             make.centerX.equalToSuperview()
         }
         
         deliveryRadioButton.snp.makeConstraints { make in
-            make.size.equalTo(23)
+            make.size.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.sizeRadioButton)
         }
         selfDeliveryRadioButton.snp.makeConstraints { make in
-            make.size.equalTo(23)
+            make.size.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.sizeRadioButton)
         }
         let deliveryStackView = UIStackView()
         deliveryStackView.addArrangedSubview(deliveryRadioButton)
         deliveryStackView.addArrangedSubview(deliveryLabel)
         deliveryStackView.axis = .horizontal
-        deliveryStackView.spacing = 20
+        deliveryStackView.spacing = UIConstants.ConstantsForTableFooterViewForBasket.spacingDeliveryStackView
         
         let selfDeliveryStackView = UIStackView()
         selfDeliveryStackView.addArrangedSubview(selfDeliveryRadioButton)
         selfDeliveryStackView.addArrangedSubview(selfDeliveryLabel)
         selfDeliveryStackView.axis = .horizontal
-        selfDeliveryStackView.spacing = 20
+        selfDeliveryStackView.spacing = UIConstants.ConstantsForTableFooterViewForBasket.spacingDeliveryStackView
         let deliveryMethodStackView = UIStackView()
         
         addSubview(deliveryMethodStackView)
         deliveryMethodStackView.addArrangedSubview(deliveryStackView)
         deliveryMethodStackView.addArrangedSubview(selfDeliveryStackView)
         deliveryMethodStackView.axis = .vertical
-        deliveryMethodStackView.spacing = 10
+        deliveryMethodStackView.spacing = UIConstants.ConstantsForTableFooterViewForBasket.spacingDeliveryMethodStackView
         deliveryMethodStackView.snp.makeConstraints { make in
-            make.top.equalTo(deliveryLabelSubMain.snp.bottom).offset(20)
-            make.leading.equalToSuperview().inset(30)
+            make.top.equalTo(deliveryLabelSubMain.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetDeliveryMethodStackViewFromTop)
+            make.leading.equalToSuperview().inset(UIConstants.ConstantsForTableFooterViewForBasket.insetDeliveryMethodStackViewFromLeading)
             
         }
         
         addSubview(adressTextField)
         adressTextField.translatesAutoresizingMaskIntoConstraints = false
         adressTextField.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.width.equalTo(350)
+            make.height.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.heightTextField)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthTextField)
             make.centerX.equalToSuperview()
-            make.top.equalTo(deliveryMethodStackView.snp.bottom).offset(20)
+            make.top.equalTo(deliveryMethodStackView.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetTextFieldFromTop)
         }
         
         addSubview(priceDeliveryLabel)
-//        priceDeliveryLabel.textAlignment = .center
         priceDeliveryLabel.snp.makeConstraints { make in
-            make.top.equalTo(adressTextField.snp.bottom).offset(10)
+            make.top.equalTo(adressTextField.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetPriceDeliveryLabelFromTop)
             make.centerX.equalToSuperview()
-//            make.leading.equalToSuperview().inset(20)
-//            make.trailing.equalToSuperview().inset(20)
         }
         
         addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
-            make.top.equalTo(priceDeliveryLabel.snp.bottom).offset(20)
+            make.top.equalTo(priceDeliveryLabel.snp.bottom).offset(UIConstants.ConstantsForTableFooterViewForBasket.offsetOrderButtonFromTop)
             make.centerX.equalToSuperview()
-            make.height.equalTo(60)
-            make.width.equalTo(350)
+            make.height.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.heightOrderButton)
+            make.width.equalTo(UIConstants.ConstantsForTableFooterViewForBasket.widthOrderButton)
         }
         
         updateSumLabel()
+        updateOrderButtonState()
+        
+        nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        numberPhoneTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        adressTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(basketChanged), name: Notification.Name("BasketChanged"), object: nil)
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        updateOrderButtonState()
+    }
+    
+    func updateOrderButtonState() {
+        let phoneFormat = "^\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}$"
+        let phonePredicate = NSPredicate(format:"SELF MATCHES %@", phoneFormat)
+        let isPhoneValid = phonePredicate.evaluate(with: numberPhoneTextField.text)
+        
+        if usedDelivery {
+            let fieldsFilled = !(nameTextField.text?.isEmpty ?? true) &&
+                               isPhoneValid &&
+                               !(adressTextField.text?.isEmpty ?? true)
+            orderButton.isEnabled = fieldsFilled
+            orderButton.backgroundColor = fieldsFilled ? UIConstants.Colors.colorBackGroundColorButton : .systemGray4
+        } else if usedSelfDelivery {
+            let fieldsFilled = !(nameTextField.text?.isEmpty ?? true) &&
+                               isPhoneValid
+            orderButton.isEnabled = fieldsFilled
+            orderButton.backgroundColor = fieldsFilled ? UIConstants.Colors.colorBackGroundColorButton : .systemGray4
+        }
+    }
+   
     
     @objc func basketChanged() {
         updateSumLabel()
@@ -194,6 +223,7 @@ class TableFooterViewForBasket: UIView {
     }()
     
     var usedDelivery: Bool = true
+    var usedSelfDelivery: Bool = false
     
     private let deliveryRadioButton: UIButton = {
         let button = UIButton()
@@ -207,11 +237,16 @@ class TableFooterViewForBasket: UIView {
     }()
     
     @objc func tapDeliveryRadioButton() {
+        usedDelivery = true
         if usedDelivery == true {
             deliveryRadioButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .normal)
             selfDeliveryRadioButton.setImage(UIImage(systemName: "circle"), for: .normal)
             adressTextField.isEnabled = true
+            usedSelfDelivery = false
         }
+        print("usedDelivery = \(usedDelivery)")
+        print("usedSelfDelivery = \(usedSelfDelivery)")
+        updateOrderButtonState()
     }
     
     private let selfDeliveryLabel: UILabel = {
@@ -233,11 +268,16 @@ class TableFooterViewForBasket: UIView {
     }()
     
     @objc func tapSelfDeliveryRadioButton() {
-        if usedDelivery == true {
+        usedSelfDelivery = true
+        if usedSelfDelivery == true {
             deliveryRadioButton.setImage(UIImage(systemName: "circle"), for: .normal)
             selfDeliveryRadioButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .normal)
             adressTextField.isEnabled = false
         }
+        usedDelivery = false
+        print("usedDelivery = \(usedDelivery)")
+        print("usedSelfDelivery = \(usedSelfDelivery)")
+        updateOrderButtonState()
     }
     
     let orderButton: UIButton = {
@@ -250,8 +290,13 @@ class TableFooterViewForBasket: UIView {
         return buttonAddBasketProduct
     }()
     
+    var removeAllProductBasket: (() -> Void)?
+    var onShowThankYouView: (() -> Void)?
+    
     @objc func orderButtonTapped() {
                 sendOrderDetailsToTelegram()
+        onShowThankYouView?()
+        removeAllProductBasket?()
     }
     
     func sendOrderDetailsToTelegram() {
