@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCz8zZvgrRNHRcr-RM4gi3oukZ_WaNF0iQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>331738184623</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>nojkasa.KD</string>
+	<key>PROJECT_ID</key>
+	<string>kd-kinza</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kd-kinza.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:331738184623:ios:2820cb4d5f7b3e65670d5a</string>
+</dict>
+</plist>

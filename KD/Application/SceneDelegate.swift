@@ -6,23 +6,34 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    
     var window: UIWindow?
 
         func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+            
+            FirebaseApp.configure()
+            
             guard let windowScene = (scene as? UIWindowScene) else { return }
             window = UIWindow(windowScene: windowScene)
             window?.rootViewController = LaunchScreenViewController()
             window?.makeKeyAndVisible()
             window?.overrideUserInterfaceStyle = .light
             
-            // Задержка
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            
+            Menu.loadMenu {
                 let mainTabBarController = MainTabBarController()
                 self.window?.rootViewController = mainTabBarController
+                MenuViewController.menuTableView.reloadData()
             }
+            // Задержка
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                let mainTabBarController = MainTabBarController()
+//                self.window?.rootViewController = mainTabBarController
+//            }
         }
 
     func sceneDidDisconnect(_ scene: UIScene) {

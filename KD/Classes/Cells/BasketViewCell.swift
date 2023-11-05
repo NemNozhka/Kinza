@@ -17,7 +17,7 @@ class BasketViewCell: UITableViewCell {
         imageProductView.image = UIImage(named: info.imageProduct)
         labelNameProduct.text = info.nameProduct
         labelPrice.text = "\(String(info.priceProduct)) Руб."
-        productId = info.idProduct
+        productId = info.id
         updateLabels(product: info)
     }
     

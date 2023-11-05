@@ -7,23 +7,59 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
+import Firebase
+import FirebaseStorage
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class MenuViewCell: UITableViewCell {
     private let cellID = "cellMenu"
     
     func configure(with info: ProductModel) {
-        imageProductView.image = UIImage(named: info.imageProduct)
-        labelNameProduct.text = info.nameProduct
-        labelDiscriptionProduct.text = info.descriptionProduct
-        likeChildrenLabel.isHidden = !info.itLikeChildren
-        spicyLabel.isHidden = !info.isSpicy
+        // Убеждаемся, что у нас есть валидный URL изображения и id продукта
+        guard let imageUrlString = info.imageProduct,
+              let imageUrl = URL(string: imageUrlString),
+              let id = info.id else {
+            // Если нет изображения или id, используем placeholder для изображения и выходим из функции
+            imageProductView.image = UIImage(named: "placeholder")
+            return
+        }
+
+        // Загружаем URL для изображения
+        let imageRef = Storage.storage().reference(forURL: imageUrlString)
+        imageRef.downloadURL { [weak self] (url, error) in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                if let downloadUrl = url {
+                    // Если URL успешно загружен, используем его для установки изображения
+                    self.imageProductView.sd_setImage(with: downloadUrl, placeholderImage: UIImage(named: "placeholder"))
+                } else {
+                    // Если произошла ошибка, используем placeholder для изображения
+                    self.imageProductView.image = UIImage(named: "placeholder")
+                    print("Failed to get download URL: \(String(describing: error))")
+                }
+            }
+        }
+
+        // Обновляем текстовые метки и видимость лейблов
+        DispatchQueue.main.async {
+            self.labelNameProduct.text = info.nameProduct
+            self.labelDiscriptionProduct.text = info.descriptionProduct
+            self.likeChildrenLabel.isHidden = !info.itLikeChildren
+            self.spicyLabel.isHidden = !info.isSpicy
+        }
         
-        if isProductInBasket(id: info.idProduct) {
-            buttonAddBasketProduct.setTitle("В корзине", for: .normal)
-            buttonAddBasketProduct.isEnabled = false
-        } else {
-            buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
-            buttonAddBasketProduct.isEnabled = true
+        // Проверяем, находится ли продукт в корзине, и обновляем состояние кнопки
+        DispatchQueue.main.async {
+            if self.isProductInBasket(id: id) {
+                self.buttonAddBasketProduct.setTitle("В корзине", for: .normal)
+                self.buttonAddBasketProduct.isEnabled = false
+            } else {
+                self.buttonAddBasketProduct.setTitle("\(info.priceProduct) Р.", for: .normal)
+                self.buttonAddBasketProduct.isEnabled = true
+            }
         }
     }
     

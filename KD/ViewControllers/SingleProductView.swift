@@ -7,16 +7,32 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
+import Firebase
+import FirebaseStorage
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
 
 class SingleProductView: UIViewController {
     
     func configure(with info: ProductModel) {
-        imageProduct.image = UIImage(named: info.imageProduct)
+        // Предполагаем, что info.imageProduct это путь к файлу в Firebase Storage
+        let imageRef = Storage.storage().reference(forURL: info.imageProduct)
+            imageRef.downloadURL { (url, error) in
+                if let url = url {
+                    self.imageProduct.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+                } else {
+                    print("Failed to get download URL: \(String(describing: error))")
+                }
+            }
         labelNameProduct.text = info.nameProduct
         labelDiscription.text = info.descriptionProduct
         labelWeight.text = "Вес: \(info.weightProduct) кг."
         
-        if isProductInBasket(id: info.idProduct) {
+        guard let id = info.id else { return }
+        
+        if isProductInBasket(id: id) {
             addBasketButton.setTitle("В корзине", for: .normal)
             addBasketButton.isEnabled = false
         } else {
